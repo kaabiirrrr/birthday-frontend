@@ -150,7 +150,7 @@
     // Set default URL based on current host (local vs production)
     window.addEventListener('DOMContentLoaded', () => {
       const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
-      const defaultUrl = isLocal ? 'http://localhost:3000' : 'https://impressing-crush-production.up.railway.app';
+      const defaultUrl = isLocal ? 'http://localhost:3000' : 'https://birthday-backend-1ftg.onrender.com';
       
       document.getElementById('api-url').value = localStorage.getItem('birthday_api_url') || defaultUrl;
     });
