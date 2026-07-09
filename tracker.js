@@ -1,6 +1,6 @@
 // ── Birthday Visit & Response Tracker ─────────────────────────────────────────
 
-const DEFAULT_BACKEND_URL = 'https://impressing-crush-production.up.railway.app';
+const DEFAULT_BACKEND_URL = 'https://birthday-backend-1ftg.onrender.com';
 
 // Detect local vs production
 const isLocal = (
@@ -15,7 +15,7 @@ const backendUrl = localStorage.getItem('birthday_api_url') ||
 let sessionId = sessionStorage.getItem('birthday_session_id');
 if (!sessionId) {
   sessionId = Math.random().toString(36).substring(2, 15) +
-              Math.random().toString(36).substring(2, 15);
+    Math.random().toString(36).substring(2, 15);
   sessionStorage.setItem('birthday_session_id', sessionId);
 }
 
@@ -27,15 +27,15 @@ function _post(payload) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   })
-  .then(r => r.json())
-  .then(d => console.log('✅ Tracker:', d))
-  .catch(e => console.warn('⚠️ Tracker offline:', e));
+    .then(r => r.json())
+    .then(d => console.log('✅ Tracker:', d))
+    .catch(e => console.warn('⚠️ Tracker offline:', e));
 }
 
 // Track a page visit (and optionally a Yes/No answer from question.html)
 function trackVisit(pageName, answer, answerRaw) {
   const payload = { sessionId, pageName };
-  if (answer)    payload.answer    = answer;
+  if (answer) payload.answer = answer;
   if (answerRaw) payload.answerRaw = answerRaw;
   _post(payload);
 }
