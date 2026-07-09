@@ -478,10 +478,29 @@
             </div>
           ` : '';
 
+          let friendColor = '#4caf50';
+          let friendBg = 'rgba(76, 175, 80, 0.08)';
+          let friendBorder = 'rgba(76, 175, 80, 0.25)';
+
+          if (r.isBestFriend === 'Normal Friend (just like others)' || r.isBestFriend === 'Normal Friend') {
+            friendColor = '#3498db';
+            friendBg = 'rgba(52, 152, 219, 0.08)';
+            friendBorder = 'rgba(52, 152, 219, 0.25)';
+          } else if (r.isBestFriend === 'Just Like Other' || r.isBestFriend === 'No 😢') {
+            friendColor = '#ff4757';
+            friendBg = 'rgba(255, 71, 87, 0.08)';
+            friendBorder = 'rgba(255, 71, 87, 0.25)';
+          } else if (r.isBestFriend && r.isBestFriend !== 'Best Friend') {
+            // Custom typed answer
+            friendColor = '#a855f7';
+            friendBg = 'rgba(168, 85, 247, 0.08)';
+            friendBorder = 'rgba(168, 85, 247, 0.25)';
+          }
+
           const friendBlock = r.isBestFriend ? `
-            <div class="highlight-box" style="background: rgba(76,175,80,0.08); border-color: rgba(76,175,80,0.25);">
-              <div class="highlight-label">🤝 Is Kabir Her Best Friend?</div>
-              <div class="highlight-text" style="color:#4caf50;">${r.isBestFriend}</div>
+            <div class="highlight-box" style="background: ${friendBg}; border-color: ${friendBorder};">
+              <div class="highlight-label">🤝 Kabir tuzha kon aahe?</div>
+              <div class="highlight-text" style="color: ${friendColor};">${r.isBestFriend}</div>
             </div>
           ` : '';
 

@@ -289,7 +289,7 @@
           </div>
 
           <div>
-            <button type="button" class="btn-hint" onclick="goToQuestions()">Need a Hint? 🐒</button>
+            <button type="button" class="btn-hint" onclick="handleHintClick(event)">Need a Hint? 🐒</button>
           </div>
 
           <p id="error-msg" class="error-message"></p>
@@ -316,17 +316,40 @@
       <!-- Step 3: Best Friend Question -->
       <div id="step-3" class="login-step" style="display: none;">
         <h1 class="login-heading">One more question... 🥺</h1>
-        <p class="login-sub" style="margin-bottom: 25px;">Kabir tuzha best friend aahe ka? ❤️</p>
-        <div class="question-buttons"
-          style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 20px; min-height: 80px; position: relative;">
-          <button type="button" id="friend-yes-btn" class="btn-unlock"
-            style="background: linear-gradient(135deg, #4cd137, #44bd32); box-shadow: 0 6px 20px rgba(68, 189, 50, 0.3); transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);"
-            onclick="submitAnswers()">Yes! 😍</button>
-          <button type="button" id="friend-no-btn" class="btn-unlock"
-            style="background: linear-gradient(135deg, #ff4757, #ff6b81); box-shadow: 0 6px 20px rgba(255, 71, 87, 0.25); transition: all 0.2s ease;"
-            onclick="handleNoFriend()">No 😢</button>
+        <p class="login-sub" style="margin-bottom: 25px;">Kabir tuzha kon aahe? ❤️</p>
+        <div id="relationship-options" class="question-buttons"
+          style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 15px; margin-bottom: 20px; min-height: 80px; position: relative;">
+          <button type="button" class="btn-unlock"
+            style="background: linear-gradient(135deg, #4cd137, #44bd32); box-shadow: 0 6px 20px rgba(68, 189, 50, 0.25); width: 100%; max-width: 320px; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);"
+            onclick="submitAnswers('Best Friend')">Best Friend 🥇</button>
+          <button type="button" class="btn-unlock"
+            style="background: linear-gradient(135deg, #3498db, #2980b9); box-shadow: 0 6px 20px rgba(52, 152, 219, 0.25); width: 100%; max-width: 320px; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);"
+            onclick="submitAnswers('Normal Friend (just like others)')">Normal Friend (just like others) 🙂</button>
+          <button type="button" class="btn-unlock"
+            style="background: linear-gradient(135deg, #e67e22, #d35400); box-shadow: 0 6px 20px rgba(230, 126, 34, 0.25); width: 100%; max-width: 320px; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);"
+            onclick="showCustomRelationshipInput()">Ajun dusra koni 🤔</button>
         </div>
-        <p id="friend-error-msg" class="error-message" style="margin-top: 10px;"></p>
+
+        <!-- Custom Relationship Input (Initially Hidden) -->
+        <div id="custom-relationship-container" style="display: none; max-width: 320px; margin: 0 auto; text-align: center;">
+          <div class="input-group" style="margin-bottom: 10px;">
+            <input type="text" id="custom-relationship-input" class="login-input" 
+              placeholder="Sanga mag kon aahe? ✍️" required autocomplete="off" oninput="updateCustomCharCount()"
+              style="width: 100%; max-width: 320px; border-radius: 25px; padding: 12px 20px;">
+            <p id="custom-char-count"
+              style="font-family:'Short Stack',cursive; font-size:13px; color:#aaa; margin: 6px 5px 0 0; text-align:right; transition: color 0.3s;">
+              0 / 10 characters</p>
+          </div>
+          <p id="custom-relationship-error" class="error-message" style="margin-top: 6px; min-height: 20px;"></p>
+          <div style="display: flex; gap: 15px; justify-content: center; margin-top: 15px;">
+            <button type="button" class="btn-unlock" 
+              style="background: linear-gradient(135deg, #7f8c8d, #95a5a6); box-shadow: 0 6px 20px rgba(127, 140, 141, 0.2); padding: 10px 25px; font-size: 16px;" 
+              onclick="hideCustomRelationshipInput()">Back ⬅️</button>
+            <button type="button" class="btn-unlock" 
+              style="background: linear-gradient(135deg, #ff6b81, #c2185b); box-shadow: 0 6px 20px rgba(194, 24, 91, 0.25); padding: 10px 25px; font-size: 16px;" 
+              onclick="submitCustomRelationship()">Submit ➡️</button>
+          </div>
+        </div>
       </div>
 
       <!-- Step 4: Hint Revealed Page -->
@@ -342,15 +365,45 @@
 
   <script>
     let userOpinion = '';
-    let noFriendCount = 0;
-    const noFriendPrompts = [
-      "No 😢",
-      "Think again! 💔",
-      "Are you sure? 🥺",
-      "Just say Yes! 😉",
-      "You can't say no! 🥇",
-      "Please? 👉👈"
+    let hintClickCount = 0;
+    const hintPrompts = [
+      "Need a Hint? 🐒",
+      "No hint for you! 😜",
+      "Not so easy! 🤣",
+      "Catch me if you can! 🏃‍♂️",
+      "Wait, one more tap! 🥺"
     ];
+
+    function handleHintClick(event) {
+      const btn = event.target;
+      if (hintClickCount < 4) {
+        hintClickCount++;
+        
+        // Update prompt text
+        if (hintPrompts[hintClickCount]) {
+          btn.textContent = hintPrompts[hintClickCount];
+        }
+
+        // Random offset ranges to move button
+        const rangeX = 140;
+        const rangeY = 80;
+        const randomX = (Math.random() - 0.5) * rangeX * 2;
+        const randomY = (Math.random() - 0.5) * rangeY * 2;
+
+        btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        
+        // Shake card for playful feedback
+        const loginCard = document.getElementById('login-card');
+        loginCard.classList.add('shake');
+        setTimeout(() => loginCard.classList.remove('shake'), 500);
+      } else {
+        // Reset states and proceed to questions
+        btn.style.transform = 'none';
+        btn.textContent = hintPrompts[0];
+        hintClickCount = 0;
+        goToQuestions();
+      }
+    }
 
     function goToQuestions() {
       document.getElementById('step-1').style.display = 'none';
@@ -388,41 +441,49 @@
       document.getElementById('step-3').style.display = 'block';
     }
 
-    function handleNoFriend() {
-      noFriendCount++;
-      const noBtn = document.getElementById('friend-no-btn');
-      const yesBtn = document.getElementById('friend-yes-btn');
-      const errorMsg = document.getElementById('friend-error-msg');
-      const loginCard = document.getElementById('login-card');
-
-      // Shake the card to be playful
-      loginCard.classList.add('shake');
-      setTimeout(() => loginCard.classList.remove('shake'), 500);
-
-      // Change button text
-      const nextPrompt = noFriendPrompts[Math.min(noFriendCount, noFriendPrompts.length - 1)];
-      noBtn.textContent = nextPrompt;
-
-      // Make Yes button grow
-      const scale = 1 + noFriendCount * 0.35;
-      yesBtn.style.transform = `scale(${scale})`;
-
-      // Move No button randomly
-      const offsetRange = 35;
-      const randomX = (Math.random() - 0.5) * offsetRange;
-      const randomY = (Math.random() - 0.5) * offsetRange;
-      noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
-
-      if (noFriendCount >= 5) {
-        noBtn.style.display = 'none';
-        errorMsg.textContent = "Okay, you have no choice but to say Yes! 😉";
-        errorMsg.classList.add('visible');
-      }
+    function showCustomRelationshipInput() {
+      document.getElementById('relationship-options').style.display = 'none';
+      document.getElementById('custom-relationship-container').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('custom-relationship-input').focus();
+      }, 100);
     }
 
-    async function submitAnswers() {
+    function hideCustomRelationshipInput() {
+      document.getElementById('custom-relationship-container').style.display = 'none';
+      document.getElementById('relationship-options').style.display = 'flex';
+      document.getElementById('custom-relationship-error').classList.remove('visible');
+    }
+
+    function updateCustomCharCount() {
+      const input = document.getElementById('custom-relationship-input');
+      const counter = document.getElementById('custom-char-count');
+      const len = input.value.trim().length;
+      counter.textContent = `${len} / 10 characters`;
+      counter.style.color = len >= 10 ? '#4cd137' : (len >= 5 ? '#e67e22' : '#aaa');
+    }
+
+    function submitCustomRelationship() {
+      const input = document.getElementById('custom-relationship-input');
+      const errorMsg = document.getElementById('custom-relationship-error');
+      const val = input.value.trim();
+
+      if (val.length < 10) {
+        errorMsg.textContent = `Ajun thoda thoda lihina! ${val.length}/10 characters typed 🥺`;
+        errorMsg.classList.add('visible');
+        input.classList.add('shake');
+        setTimeout(() => input.classList.remove('shake'), 500);
+        input.focus();
+        return;
+      }
+
+      errorMsg.classList.remove('visible');
+      submitAnswers(val);
+    }
+
+    async function submitAnswers(friendType) {
       const opinion = userOpinion;
-      const isBestFriend = 'Yes! 😍';
+      const isBestFriend = friendType;
 
       // Save opinion + best friend answer to MongoDB
       sendOpinionAndFriend(opinion, isBestFriend);
