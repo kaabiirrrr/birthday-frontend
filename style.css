@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Zeyada&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Patrick+Hand&display=swap');
 
 
 
@@ -19,11 +19,11 @@ body {
   background-size: 500px;
   background-position: center center;
   padding: 20px 100px;
-/*  min-width: 800px; */
-  
+  /*  min-width: 800px; */
+
   transform: rotateZ(-5deg);
-  box-shadow: 1px 15px 20px 0px rgba(0,0,0,0.5);
-  
+  box-shadow: 1px 15px 20px 0px rgba(0, 0, 0, 0.5);
+
   position: absolute;
 }
 
@@ -38,6 +38,7 @@ body {
 .paper.image {
   padding: 10px;
 }
+
 .paper.image p {
   font-size: 30px;
 }
@@ -63,12 +64,12 @@ img {
 }
 
 p {
-  font-family: 'Zeyada';
-  font-size: 50px;
-  color: rgb(0,0,100);
+  font-family: 'Caveat', cursive;
+  font-size: 40px;
+  color: rgb(0, 0, 100);
   opacity: 0.75;
   user-select: none;
-  
+
   /* filter: drop-shadow(2px 1.5px 1px rgba(0,0,105,0.9)); */
 }
 
@@ -97,7 +98,7 @@ p {
 }
 
 .paper.envelope .envelope-title {
-  font-family: 'Homemade Apple', cursive;
+  font-family: 'Patrick Hand', cursive;
   font-size: 20px;
   color: #8b0000;
   margin: 0;
@@ -106,7 +107,7 @@ p {
 }
 
 .paper.envelope .envelope-sub {
-  font-family: 'Zeyada', cursive;
+  font-family: 'Caveat', cursive;
   font-size: 20px;
   color: #c2185b;
   margin: 4px 0 0 0;
@@ -116,8 +117,13 @@ p {
 }
 
 @keyframes heartPulse {
-  from { transform: scale(1); }
-  to { transform: scale(1.12); }
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.12);
+  }
 }
 
 /* Glassmorphic Dialog Box */
@@ -135,7 +141,7 @@ dialog {
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
   overflow: hidden;
   color: #2c3e50;
-  
+
   /* Top-layer transitions */
   opacity: 0;
   transform: scale(0.92);
@@ -148,7 +154,7 @@ dialog {
 dialog[open] {
   opacity: 1;
   transform: scale(1);
-  
+
   @starting-style {
     opacity: 0;
     transform: scale(0.92);
@@ -159,9 +165,9 @@ dialog::backdrop {
   background-color: rgba(255, 182, 193, 0);
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
-  transition: 
-    display 0.4s allow-discrete, 
-    overlay 0.4s allow-discrete, 
+  transition:
+    display 0.4s allow-discrete,
+    overlay 0.4s allow-discrete,
     background-color 0.4s ease-out,
     backdrop-filter 0.4s ease-out;
 }
@@ -170,6 +176,7 @@ dialog[open]::backdrop {
   background-color: rgba(30, 35, 45, 0.45);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+
   @starting-style {
     background-color: rgba(255, 182, 193, 0);
     backdrop-filter: blur(0px);
@@ -191,7 +198,7 @@ dialog[open]::backdrop {
   top: 25px;
   right: 25px;
   background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   font-size: 26px;
   width: 42px;
   height: 42px;
@@ -237,7 +244,7 @@ dialog[open]::backdrop {
   align-items: center;
   gap: 8px;
   transition: all 0.3s ease;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
 }
 
 .music-btn:hover {
@@ -272,14 +279,30 @@ dialog[open]::backdrop {
   animation: visualizerBounce 0.6s infinite alternate ease-in-out;
 }
 
-.music-visualizer.playing .bar:nth-child(1) { animation-delay: 0.1s; }
-.music-visualizer.playing .bar:nth-child(2) { animation-delay: 0.3s; }
-.music-visualizer.playing .bar:nth-child(3) { animation-delay: 0.2s; }
-.music-visualizer.playing .bar:nth-child(4) { animation-delay: 0.4s; }
+.music-visualizer.playing .bar:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.music-visualizer.playing .bar:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.music-visualizer.playing .bar:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.music-visualizer.playing .bar:nth-child(4) {
+  animation-delay: 0.4s;
+}
 
 @keyframes visualizerBounce {
-  from { height: 3px; }
-  to { height: 18px; }
+  from {
+    height: 3px;
+  }
+
+  to {
+    height: 18px;
+  }
 }
 
 /* Header Content */
@@ -297,7 +320,7 @@ dialog[open]::backdrop {
 }
 
 .dialog-header .subtitle {
-  font-family: 'Zeyada', cursive;
+  font-family: 'Caveat', cursive;
   font-size: 24px;
   color: #666;
   margin: 6px 0 0 0;
@@ -309,7 +332,7 @@ dialog[open]::backdrop {
   display: flex;
   justify-content: center;
   gap: 12px;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   padding-bottom: 12px;
   margin-bottom: 20px;
 }
@@ -354,8 +377,15 @@ dialog[open]::backdrop {
 }
 
 @keyframes tabFadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Tab 1: Letter Styling (Matching Millimeter Paper Background) */
@@ -364,17 +394,18 @@ dialog[open]::backdrop {
   background-image: url("https://i0.wp.com/textures.world/wp-content/uploads/2018/10/2-Millimeter-Paper-Background-copy.jpg?ssl=1");
   background-size: 500px;
   background-position: center center;
-  border-radius: 14px; /* Rounded card corners */
-  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+  border-radius: 14px;
+  /* Rounded card corners */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
   padding: 30px 45px;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   position: relative;
 }
 
 .letter-body {
-  font-family: 'Homemade Apple', cursive;
-  font-size: 15px;
-  line-height: 1.88;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 17px;
+  line-height: 1.6;
   color: rgb(22, 28, 70);
   word-break: break-word;
 }
@@ -411,7 +442,7 @@ dialog[open]::backdrop {
 .polaroid-card {
   background: #fff;
   padding: 10px 10px 30px 10px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
   border: 1px solid #e8e8e8;
   border-radius: 2px;
   cursor: pointer;
@@ -421,14 +452,9 @@ dialog[open]::backdrop {
   box-sizing: border-box;
 }
 
-.polaroid-card:nth-child(1) { transform: rotate(-3deg); }
-.polaroid-card:nth-child(2) { transform: rotate(2deg) translateY(2px); }
-.polaroid-card:nth-child(3) { transform: rotate(-1.5deg) translateY(-3px); }
-.polaroid-card:nth-child(4) { transform: rotate(3.5deg) translateY(4px); }
-
 .polaroid-card:hover {
-  transform: scale(1.08) rotate(0deg) translateY(-8px);
-  box-shadow: 0 16px 28px rgba(0,0,0,0.22);
+  transform: scale(1.08) rotate(0deg) translateY(-8px) !important;
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.22);
   z-index: 10;
 }
 
@@ -443,8 +469,9 @@ dialog[open]::backdrop {
 .polaroid-img-wrapper img {
   width: 100%;
   height: 100%;
+  max-height: none !important;
   object-fit: cover;
-  object-position: center top;
+  object-position: center;
   transition: transform 0.5s ease;
 }
 
@@ -453,8 +480,8 @@ dialog[open]::backdrop {
 }
 
 .polaroid-caption {
-  font-family: 'Zeyada', cursive;
-  font-size: 20px;
+  font-family: 'Caveat', cursive;
+  font-size: 24px;
   font-weight: bold;
   text-align: center;
   margin-top: 10px;
@@ -491,7 +518,8 @@ dialog[open]::backdrop {
   transform: rotateY(180deg);
 }
 
-.wish-card-front, .wish-card-back {
+.wish-card-front,
+.wish-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -504,8 +532,8 @@ dialog[open]::backdrop {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 5px 14px rgba(0,0,0,0.06);
-  border: 1px solid rgba(255,255,255,0.5);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .wish-card-front {
@@ -520,8 +548,8 @@ dialog[open]::backdrop {
 }
 
 .wish-click-hint {
-  font-family: 'Zeyada', cursive;
-  font-size: 18px;
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
   color: #888;
   font-weight: bold;
 }
@@ -568,7 +596,7 @@ dialog[open]::backdrop {
   max-height: 72vh;
   border: 6px solid white;
   border-radius: 4px;
-  box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
   transform: scale(0.92);
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.15);
 }
@@ -596,9 +624,9 @@ dialog[open]::backdrop {
 .lightbox-caption {
   margin-top: 18px;
   color: #eee;
-  font-family: 'Homemade Apple', cursive;
+  font-family: 'Patrick Hand', cursive;
   font-size: 22px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* --- Mobile Responsiveness --- */
@@ -606,9 +634,25 @@ dialog[open]::backdrop {
   body {
     background-size: 600px;
   }
-  
+
   .paper {
-    padding: 15px 40px;
+    padding: 15px 25px;
+    max-width: 90vw;
+    box-sizing: border-box;
+  }
+
+  .paper p {
+    font-size: 24px !important;
+    line-height: 1.3;
+  }
+
+  .paper.image p {
+    font-size: 18px !important;
+    line-height: 1.3;
+  }
+
+  .paper img {
+    max-height: 150px;
   }
 
   .paper.envelope {
@@ -616,11 +660,11 @@ dialog[open]::backdrop {
     height: 150px;
     padding: 12px;
   }
-  
+
   .paper.envelope .wax-seal {
     font-size: 32px;
   }
-  
+
   .paper.envelope .envelope-title {
     font-size: 18px;
   }
@@ -660,7 +704,8 @@ dialog[open]::backdrop {
   }
 
   .music-btn .music-text {
-    display: none; /* Hide button text to save space on mobile */
+    display: none;
+    /* Hide button text to save space on mobile */
   }
 
   .dialog-header {
@@ -678,9 +723,10 @@ dialog[open]::backdrop {
   }
 
   .dialog-tabs {
-    gap: 4px;
+    gap: 6px 4px;
     margin-bottom: 15px;
     padding-bottom: 8px;
+    flex-wrap: wrap;
   }
 
   .tab-btn {
@@ -739,11 +785,13 @@ dialog[open]::backdrop {
     transform: none;
     transition-duration: 0.1s;
   }
+
   @starting-style {
     dialog[open] {
       transform: none;
     }
   }
+
   .paper.envelope .wax-seal,
   .music-visualizer.playing .bar {
     animation: none;
@@ -769,7 +817,7 @@ dialog[open]::backdrop {
 }
 
 .question-text {
-  font-family: 'Homemade Apple', cursive;
+  font-family: 'Patrick Hand', cursive;
   font-size: 20px;
   color: #2c3e50;
   margin-bottom: 30px;
@@ -794,7 +842,7 @@ dialog[open]::backdrop {
   border-radius: 25px;
   cursor: pointer;
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .yes-btn {
@@ -821,8 +869,15 @@ dialog[open]::backdrop {
 }
 
 @keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.85); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .success-heart {
@@ -832,7 +887,9 @@ dialog[open]::backdrop {
 }
 
 @keyframes heartBeatPulse {
-  to { transform: scale(1.22); }
+  to {
+    transform: scale(1.22);
+  }
 }
 
 .success-content h2 {
@@ -843,8 +900,8 @@ dialog[open]::backdrop {
 }
 
 .success-content p {
-  font-family: 'Homemade Apple', cursive;
-  font-size: 16px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 18px;
   line-height: 1.6;
   color: #2c3e50;
   margin: 8px 0;
@@ -852,8 +909,8 @@ dialog[open]::backdrop {
 }
 
 .success-subtext {
-  font-family: 'Zeyada', cursive;
-  font-size: 24px;
+  font-family: 'Caveat', cursive;
+  font-size: 26px;
   color: #d81b60;
   font-weight: bold;
 }
@@ -890,7 +947,7 @@ dialog[open]::backdrop {
   position: relative;
   padding: 35px 35px 25px 35px;
   box-sizing: border-box;
-  
+
   /* Smooth page entrance animation */
   animation: cardPageEntrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
@@ -900,6 +957,7 @@ dialog[open]::backdrop {
     opacity: 0;
     transform: scale(0.95) translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -914,5 +972,32 @@ dialog[open]::backdrop {
     width: 92vw;
     border-radius: 20px;
     padding: 20px 15px 15px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-container {
+    padding: 15px 10px 10px 10px;
+    width: 95vw;
+    height: 92vh;
+    max-height: 88vh;
+  }
+
+  .dialog-tabs {
+    gap: 8px 4px;
+  }
+
+  .tab-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .letter-paper {
+    padding: 15px;
+  }
+
+  .letter-body {
+    font-size: 15px;
+    line-height: 1.5;
   }
 }

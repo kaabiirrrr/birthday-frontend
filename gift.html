@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Return Gift 🎁</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Caveat:wght@400;700&family=Patrick+Hand&display=swap">
+  <link rel="stylesheet" href="./style.css">
+  <script src="tracker.js"></script>
+  <script>
+    if (sessionStorage.getItem('birthday_unlocked') !== 'true') {
+      window.location.href = 'index.html';
+    }
+  </script>
+  <style>
+    p {
+      font-family: inherit;
+      font-size: inherit;
+      opacity: 1;
+      user-select: auto;
+      color: inherit;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background-image: url("https://www.psdgraphics.com/wp-content/uploads/2022/01/white-math-paper-texture.jpg");
+      background-size: 1000px;
+      background-position: center;
+      padding: 40px 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 600px;
+      animation: cardEntrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      z-index: 10;
+    }
+
+    @keyframes cardEntrance {
+      from {
+        opacity: 0;
+        transform: scale(0.92) translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .login-card {
+      padding: 40px 30px;
+      box-sizing: border-box;
+      text-align: center;
+      position: relative;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+
+    .login-heading {
+      font-family: 'Short Stack', cursive;
+      font-size: 28px;
+      color: #c2185b;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    .login-sub {
+      font-family: 'Caveat', cursive;
+      font-size: 24px;
+      color: #555;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .login-textarea {
+      font-family: 'Short Stack', cursive;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 15px;
+      font-size: 16px;
+      border: 2px solid rgba(194, 24, 91, 0.2);
+      border-radius: 15px;
+      outline: none;
+      text-align: left;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #2c3e50;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      height: 140px;
+      resize: none;
+      line-height: 1.5;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .login-textarea:focus {
+      border-color: #c2185b;
+      box-shadow: 0 6px 15px rgba(194, 24, 91, 0.15);
+      background-color: #ffffff;
+    }
+
+    .btn-unlock {
+      font-family: 'Short Stack', cursive;
+      font-size: 18px;
+      padding: 12px 36px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff6b81, #c2185b);
+      color: white;
+      box-shadow: 0 6px 20px rgba(194, 24, 91, 0.35);
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+      z-index: 2;
+      position: relative;
+    }
+
+    .btn-unlock:hover {
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 10px 25px rgba(194, 24, 91, 0.45);
+    }
+
+    .btn-unlock:active {
+      transform: scale(0.98) translateY(0);
+    }
+
+    .error-message {
+      font-family: 'Patrick Hand', cursive;
+      font-size: 15px;
+      color: #ff4757;
+      margin-top: 15px;
+      min-height: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .error-message.visible {
+      opacity: 1;
+    }
+
+    .shake {
+      animation: shake 0.5s ease-in-out;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-6px); }
+      20%, 40%, 60%, 80% { transform: translateX(6px); }
+    }
+
+    /* ---- Floating Chocos & Hearts Canvas ---- */
+    .choco-field {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .floating-gift-item {
+      position: absolute;
+      width: 40px;
+      animation: floatUp linear infinite;
+      opacity: 0;
+      user-select: none;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+    }
+
+    @keyframes floatUp {
+      0%   { transform: translateY(110vh) rotate(-15deg); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 0.9; }
+      100% { transform: translateY(-150px) rotate(45deg); opacity: 0; }
+    }
+
+    /* Pulse animation for Rosella Gift */
+    .hero-choco {
+      width: clamp(150px, 30vw, 240px);
+      display: block;
+      margin: 0 auto 20px;
+      animation: heroFloat 2.4s infinite alternate ease-in-out, pulseGift 2.4s infinite alternate ease-in-out;
+      filter: drop-shadow(0 10px 24px rgba(0,0,0,0.25));
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .hero-choco:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    @keyframes heroFloat {
+      from { transform: translateY(0) rotate(-4deg); }
+      to   { transform: translateY(-14px) rotate(4deg); }
+    }
+
+    @keyframes pulseGift {
+      from { filter: drop-shadow(0 10px 24px rgba(255, 107, 129, 0.2)); }
+      to   { filter: drop-shadow(0 12px 30px rgba(255, 107, 129, 0.45)); }
+    }
+
+    /* Responsive Media Queries */
+    @media (max-width: 480px) {
+      body {
+        padding: 20px 10px;
+      }
+      .login-container {
+        padding: 0 5px;
+      }
+      .login-card {
+        padding: 30px 15px;
+      }
+      .login-heading {
+        font-size: 24px;
+        line-height: 1.3;
+      }
+      .login-sub {
+        font-size: 18px;
+        margin-bottom: 20px !important;
+      }
+      .login-textarea {
+        font-size: 15px;
+        padding: 12px;
+        height: 120px;
+      }
+      .btn-unlock {
+        font-size: 16px;
+        padding: 10px 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Canvas -->
+  <div class="choco-field" id="choco-field"></div>
+
+  <!-- Music controls shared session state -->
+  <div class="top-music" style="position: fixed; top: 20px; left: 20px; z-index: 100; display: flex; align-items: center; gap: 10px;">
+    <button id="music-toggle" class="music-btn" aria-label="Toggle music">
+      <span class="music-icon">🎵</span>
+      <span class="music-text">Play Sound</span>
+    </button>
+    <div class="music-visualizer" id="visualizer">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+
+  <div class="login-container">
+    <div class="login-card">
+      <!-- State 1: Form -->
+      <div id="gift-form-state">
+        <h1 class="login-heading">Send a Return Gift 🎁</h1>
+        <p class="login-sub">Write a sweet note about the surprise & me... (min 100 characters) 👉👈</p>
+        
+        <form id="gift-form" onsubmit="submitReturnGift(event)">
+          <div class="input-group" style="max-width: 520px; margin: 0 auto 10px auto; text-align: left;">
+            <textarea id="gift-input" class="login-textarea" placeholder="Write your feelings here... (min 100 characters) ✍️❤️" required
+              autocomplete="off" oninput="updateCharCount()"></textarea>
+            <p id="char-count"
+              style="font-family:'Short Stack',cursive; font-size:13px; color:#aaa; margin: 6px 5px 0 0; text-align:right; transition: color 0.3s;">
+              0 / 100 characters minimum</p>
+          </div>
+          <p id="gift-error" class="error-message" style="margin-top: 6px;"></p>
+          <button type="submit" class="btn-unlock" style="margin-top: 15px;">Send Gift ❤️</button>
+        </form>
+      </div>
+
+      <!-- State 2: Success (Rosella Gift Reveal) -->
+      <div id="gift-success-state" style="display: none;">
+        <h1 class="login-heading">Gift Submitted! 🎉🎁</h1>
+        <p class="login-sub" style="margin-bottom: 20px !important;">Here is your return gift... Click it! 🍫</p>
+        
+        <div style="position: relative; height: 260px;">
+          <img src="images/Screenshot_2026-07-09_at_3.48.16_PM-removebg-preview.png" alt="Rosella Chocolate" class="hero-choco" onclick="popMoreItems()">
+        </div>
+
+        <p class="login-sub" style="font-size: 20px; color: #c2185b; margin-top: 10px; margin-bottom: 25px !important; line-height: 1.5;">
+          "A Rosella Chocolate for you too! ❤️ Thank you so much for the beautiful memories and sweet words. Hope this put a big smile on your face! 🎂✨"
+        </p>
+
+        <a href="drag.html" class="btn-unlock" style="text-decoration: none; display: inline-block;">Back to Home 🏠</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Track page visit
+    trackVisit('return_gift');
+
+    function updateCharCount() {
+      const input = document.getElementById('gift-input');
+      const counter = document.getElementById('char-count');
+      const len = input.value.trim().length;
+      counter.textContent = `${len} / 100 characters minimum`;
+      counter.style.color = len >= 100 ? '#4cd137' : (len >= 50 ? '#e67e22' : '#aaa');
+    }
+
+    function submitReturnGift(e) {
+      e.preventDefault();
+      const input = document.getElementById('gift-input');
+      const errorMsg = document.getElementById('gift-error');
+      const text = input.value.trim();
+
+      if (text.length < 100) {
+        errorMsg.textContent = `Aww, please write at least 100 characters! 🥺`;
+        errorMsg.classList.add('visible');
+        input.classList.add('shake');
+        setTimeout(() => input.classList.remove('shake'), 500);
+        return;
+      }
+
+      errorMsg.classList.remove('visible');
+      
+      // Save response to DB
+      sendReturnGift(text);
+
+      // Transition to success state
+      document.getElementById('gift-form-state').style.display = 'none';
+      document.getElementById('gift-success-state').style.display = 'block';
+
+      // Start floating animations celebration
+      celebrateGift();
+    }
+
+    function celebrateGift() {
+      const field = document.getElementById('choco-field');
+      const items = [
+        'images/Screenshot_2026-07-09_at_3.48.16_PM-removebg-preview.png',
+        'images/heart.webp'
+      ];
+      
+      const total = 30;
+      for (let i = 0; i < total; i++) {
+        createFloatingItem(items[Math.floor(Math.random() * items.length)]);
+      }
+    }
+
+    function createFloatingItem(src) {
+      const field = document.getElementById('choco-field');
+      const el = document.createElement('img');
+      el.className = 'floating-gift-item';
+      el.src = src;
+      
+      const left  = Math.random() * 100;
+      const size  = 30 + Math.random() * 45; // 30px - 75px
+      const delay = Math.random() * 5;
+      const dur   = 4 + Math.random() * 5;
+
+      el.style.cssText = `
+        left: ${left}vw;
+        width: ${size}px;
+        animation-delay: ${delay}s;
+        animation-duration: ${dur}s;
+      `;
+      field.appendChild(el);
+      
+      // Remove element after animation completes to avoid memory leak
+      setTimeout(() => el.remove(), (delay + dur) * 1000);
+    }
+
+    function popMoreItems() {
+      const items = [
+        'images/Screenshot_2026-07-09_at_3.48.16_PM-removebg-preview.png',
+        'images/heart.webp'
+      ];
+      for (let i = 0; i < 8; i++) {
+        createFloatingItem(items[Math.floor(Math.random() * items.length)]);
+      }
+      
+      // Play a cute audio sound
+      if (musicBox) {
+        musicBox.playNote(523.25, 0.15); // C5
+        setTimeout(() => musicBox.playNote(659.25, 0.15), 100); // E5
+        setTimeout(() => musicBox.playNote(783.99, 0.25), 200); // G5
+      }
+    }
+
+    /* Music Player - Sync state with other pages */
+    class MusicBox {
+      constructor() {
+        this.audio = new Audio('images/ishq_bulaava_bollywood.mp3');
+        this.audio.loop = true;
+        this.isPlaying = false;
+
+        const savedTime = sessionStorage.getItem('music_current_time');
+        if (savedTime) {
+          this.audio.currentTime = parseFloat(savedTime);
+        }
+
+        this.audio.addEventListener('timeupdate', () => {
+          sessionStorage.setItem('music_current_time', this.audio.currentTime);
+        });
+      }
+      start() {
+        this.isPlaying = true;
+        sessionStorage.setItem('music_is_playing', 'true');
+        this.audio.play().catch(err => console.log("Audio play blocked: " + err));
+      }
+      stop() {
+        this.isPlaying = false;
+        sessionStorage.setItem('music_is_playing', 'false');
+        this.audio.pause();
+      }
+      // Simple beep generator using web audio API for interactivity
+      playNote(frequency, duration) {
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          
+          osc.type = 'sine';
+          osc.frequency.value = frequency;
+          
+          gain.gain.setValueAtTime(0.2, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
+          
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          
+          osc.start();
+          osc.stop(ctx.currentTime + duration);
+        } catch (e) {
+          console.warn("Web Audio not supported or blocked");
+        }
+      }
+    }
+
+    const musicBox = new MusicBox();
+    const musicToggle = document.getElementById('music-toggle');
+    const visualizer = document.getElementById('visualizer');
+    const musicIcon = musicToggle.querySelector('.music-icon');
+    const musicText = musicToggle.querySelector('.music-text');
+
+    function updateMusicUI() {
+      if (musicBox.isPlaying) {
+        musicIcon.textContent = '⏸️'; 
+        musicText.textContent = 'Pause Sound';
+        musicToggle.classList.add('playing'); 
+        visualizer.classList.add('playing');
+      } else {
+        musicIcon.textContent = '🎵'; 
+        musicText.textContent = 'Play Sound';
+        musicToggle.classList.remove('playing'); 
+        visualizer.classList.remove('playing');
+      }
+    }
+
+    musicToggle.addEventListener('click', () => {
+      if (musicBox.isPlaying) {
+        musicBox.stop();
+      } else {
+        musicBox.start();
+      }
+      updateMusicUI();
+    });
+
+    // Auto-resume state
+    if (sessionStorage.getItem('music_is_playing') !== 'false') {
+      musicBox.start();
+      updateMusicUI();
+    }
+  </script>
+</body>
+</html>

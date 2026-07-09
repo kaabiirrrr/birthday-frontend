@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Our Memories 📸</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Homemade+Apple&family=Zeyada&display=swap">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Caveat:wght@400;700&family=Patrick+Hand&display=swap">
   <link rel="stylesheet" href="./style.css">
   <script>
     if (sessionStorage.getItem('birthday_unlocked') !== 'true') {
@@ -14,7 +15,13 @@
   </script>
   <script src="tracker.js"></script>
   <style>
-    p { font-family: inherit; font-size: inherit; opacity: 1; user-select: auto; color: inherit; }
+    p {
+      font-family: inherit;
+      font-size: inherit;
+      opacity: 1;
+      user-select: auto;
+      color: inherit;
+    }
 
     body {
       min-height: 100vh;
@@ -55,8 +62,8 @@
     }
 
     .page-heading .subtitle-text {
-      font-family: 'Zeyada', cursive;
-      font-size: clamp(20px, 3vw, 30px);
+      font-family: 'Caveat', cursive;
+      font-size: clamp(24px, 3vw, 34px);
       color: #777;
       font-weight: bold;
       margin: 0;
@@ -75,7 +82,7 @@
 
     .polaroid-img-wrapper {
       position: relative !important;
-      aspect-ratio: 4 / 3 !important;
+      aspect-ratio: 1 / 1 !important;
       overflow: hidden !important;
     }
 
@@ -84,20 +91,92 @@
       inset: 0 !important;
       width: 100% !important;
       height: 100% !important;
+      max-height: none !important;
       object-fit: cover !important;
-      object-position: center top !important;
+      object-position: center !important;
       display: block !important;
     }
 
     .polaroid-card {
-      max-width: 380px;
-      padding: 20px 20px 48px 20px !important;
+      max-width: 280px !important;
+      padding: 12px 12px 32px 12px !important;
       justify-self: center;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+    }
+
+    /* Alternating shaky columns for memories page only */
+    .photos-grid .polaroid-card:nth-child(3n+1) {
+      transform: rotate(-2deg) translateY(-12px);
+    }
+    .photos-grid .polaroid-card:nth-child(3n+2) {
+      transform: rotate(2.5deg) translateY(12px);
+    }
+    .photos-grid .polaroid-card:nth-child(3n+3) {
+      transform: rotate(-1deg) translateY(-6px);
+    }
+
+    /* Straighten card on hover */
+    .photos-grid .polaroid-card:hover {
+      transform: scale(1.08) rotate(0deg) translateY(-8px) !important;
+      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.22) !important;
+      z-index: 10;
+    }
+
+    .polaroid-card:hover img {
+      transform: scale(1.12) !important;
     }
 
     .polaroid-caption {
-      font-size: clamp(28px, 4vw, 36px) !important;
-      margin-top: 18px !important;
+      font-size: 22px !important;
+      margin-top: 12px !important;
+    }
+
+    /* Premium Lightbox Polaroid card */
+    .lightbox-card {
+      background: white;
+      padding: 16px 16px 36px 16px;
+      border-radius: 8px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+      max-width: 90%;
+      width: 360px;
+      transform: scale(0.92);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .lightbox.active .lightbox-card {
+      transform: scale(1);
+    }
+
+    .lightbox-card .lightbox-img-wrapper {
+      width: 100%;
+      aspect-ratio: 1 / 1 !important;
+      overflow: hidden;
+      border: 1px solid #ddd;
+      background-color: #f7f9fa;
+      position: relative;
+    }
+
+    .lightbox-card img {
+      width: 100%;
+      height: 100%;
+      max-height: none !important;
+      object-fit: cover !important;
+      object-position: center !important;
+      position: absolute;
+      inset: 0;
+    }
+
+    .lightbox-card .lightbox-caption {
+      margin-top: 16px;
+      color: #2c3e50 !important;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 24px !important;
+      text-align: center;
+      text-shadow: none !important;
     }
 
     .btn-continue {
@@ -121,8 +200,53 @@
     }
 
     @media (max-width: 600px) {
-      .photos-grid { grid-template-columns: 1fr; gap: 24px; }
-      .polaroid-card { max-width: 320px; }
+      .photos-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .polaroid-card {
+        max-width: 280px !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 40px 10px 30px;
+      }
+
+      .page-heading {
+        margin-bottom: 24px;
+      }
+
+      .page-heading h1 {
+        font-size: 24px;
+      }
+
+      .page-heading .subtitle-text {
+        font-size: 18px;
+      }
+
+      .photos-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 5px;
+      }
+
+      .polaroid-card {
+        max-width: 280px !important;
+        padding: 12px 12px 32px 12px !important;
+      }
+
+      .polaroid-caption {
+        font-size: 22px !important;
+        margin-top: 12px !important;
+      }
+
+      .btn-continue {
+        font-size: 16px;
+        padding: 12px 36px;
+      }
     }
   </style>
 </head>
@@ -143,33 +267,73 @@
   </div>
 
   <div class="page-heading">
-    <h1>Our Memories 📸</h1>
+    <h1>Cutee Person Photo Gallery 📸</h1>
     <p class="subtitle-text">Click a photo to view it ❤️</p>
   </div>
 
   <div class="photos-grid">
-    <div class="polaroid-card" data-caption="Best Friend 🤝">
+    <div class="polaroid-card" data-caption="Favorite Friend 🤝">
       <div class="polaroid-img-wrapper">
         <img src="images/pr01.jpeg" alt="Memory 1" />
       </div>
-      <div class="polaroid-caption">Best Friend 🤝</div>
+      <div class="polaroid-caption">Favorite Friend 💕</div>
     </div>
 
     <div class="polaroid-card" data-caption="So Beautiful ✨">
       <div class="polaroid-img-wrapper">
-        <img src="images/2.jpeg" alt="Memory 2" />
+        <img src="images/pr02.jpeg" alt="Memory 2" />
       </div>
       <div class="polaroid-caption">So Beautiful ✨</div>
     </div>
 
+    <div class="polaroid-card" data-caption="Simply Gorgeous 🌸">
+      <div class="polaroid-img-wrapper">
+        <img src="images/pr03.jpeg" alt="Memory 3" />
+      </div>
+      <div class="polaroid-caption">Simply Gorgeous 🌸</div>
+    </div>
+
     <div class="polaroid-card" data-caption="Cutest Smile ❤️">
       <div class="polaroid-img-wrapper">
-        <img src="images/3.jpg" alt="Memory 3" />
+        <img src="images/pr04.jpeg" alt="Memory 4" />
       </div>
       <div class="polaroid-caption">Cutest Smile ❤️</div>
     </div>
 
+    <div class="polaroid-card" data-caption="Brightest Vibe ☀️">
+      <div class="polaroid-img-wrapper">
+        <img src="images/pr05.jpeg" alt="Memory 5" />
+      </div>
+      <div class="polaroid-caption">Brightest Vibe ☀️</div>
+    </div>
 
+    <div class="polaroid-card" data-caption="Favorite Memory 📸">
+      <div class="polaroid-img-wrapper">
+        <img src="images/pr06.jpeg" alt="Memory 6" />
+      </div>
+      <div class="polaroid-caption">Sorry, iss din kee liye 😞</div>
+    </div>
+
+    <div class="polaroid-card" data-caption="Sparkling Eyes ✨">
+      <div class="polaroid-img-wrapper">
+        <img src="images/pr07.jpeg" alt="Memory 7" />
+      </div>
+      <div class="polaroid-caption">Sparkling Eyes ✨</div>
+    </div>
+
+    <div class="polaroid-card" data-caption="Sweetest Moment 🥰">
+      <div class="polaroid-img-wrapper">
+        <img src="images/pr08.jpeg" alt="Memory 8" />
+      </div>
+      <div class="polaroid-caption">Cute ultra pro 🥰</div>
+    </div>
+
+    <div class="polaroid-card" data-caption="Together Forever ♾️❤️">
+      <div class="polaroid-img-wrapper">
+        <img src="images/pr09.jpeg" alt="Memory 9" />
+      </div>
+      <div class="polaroid-caption">Together Forever ♾️</div>
+    </div>
   </div>
 
   <a href="letter.html" class="btn-continue">Read My Letter 💌</a>
@@ -177,8 +341,12 @@
   <!-- Lightbox -->
   <div id="lightbox" class="lightbox">
     <span class="lightbox-close" id="close-lightbox">&times;</span>
-    <img class="lightbox-content" id="lightbox-img" alt="Enlarged photo">
-    <div id="lightbox-caption" class="lightbox-caption"></div>
+    <div class="lightbox-card">
+      <div class="lightbox-img-wrapper">
+        <img id="lightbox-img" src="" alt="Enlarged photo">
+      </div>
+      <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
   </div>
 
   <script>

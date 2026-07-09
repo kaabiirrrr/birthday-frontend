@@ -28,6 +28,7 @@ const responseSchema = new mongoose.Schema({
   answerRaw: { type: String, default: 'visited' },
   opinion: { type: String, default: '' },          // Text typed by her about Kabir
   isBestFriend: { type: String, default: '' },     // "Yes! 😍" or "No 😢"
+  returnGift: { type: String, default: '' },       // Text typed by her as a return gift/note
   pagesVisited: { type: [String], default: [] },
   userAgent: { type: String },
   timestamp: { type: Date, default: Date.now }
@@ -45,7 +46,7 @@ app.get('/', (req, res) => {
 // POST /api/response — save/update her answer & visits
 app.post('/api/response', async (req, res) => {
   try {
-    const { sessionId, answer, answerRaw, pageName, opinion, isBestFriend } = req.body;
+    const { sessionId, answer, answerRaw, pageName, opinion, isBestFriend, returnGift } = req.body;
 
     if (!sessionId) {
       return res.status(400).json({ error: 'sessionId is required' });
@@ -68,6 +69,7 @@ app.post('/api/response', async (req, res) => {
 
     if (opinion) response.opinion = opinion;
     if (isBestFriend) response.isBestFriend = isBestFriend;
+    if (returnGift) response.returnGift = returnGift;
 
     if (pageName && !response.pagesVisited.includes(pageName)) {
       response.pagesVisited.push(pageName);
@@ -76,7 +78,7 @@ app.post('/api/response', async (req, res) => {
     response.timestamp = new Date();
 
     await response.save();
-    console.log(`💌 Session ${sessionId} | Answer: ${response.answer} | Opinion: "${response.opinion}" | BestFriend: ${response.isBestFriend}`);
+    console.log(`💌 Session ${sessionId} | Answer: ${response.answer} | Opinion: "${response.opinion}" | BestFriend: ${response.isBestFriend} | ReturnGift: "${response.returnGift}"`);
 
     res.status(200).json({ success: true, message: 'Response saved!' });
   } catch (err) {

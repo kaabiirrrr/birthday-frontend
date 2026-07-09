@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Wishes For You ✨</title>
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Homemade+Apple&family=Zeyada&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Caveat:wght@400;700&family=Patrick+Hand&display=swap">
   <link rel="stylesheet" href="./style.css">
   <script>
     if (sessionStorage.getItem('birthday_unlocked') !== 'true') {
@@ -62,8 +62,8 @@
     }
 
     .page-heading .subtitle-text {
-      font-family: 'Zeyada', cursive;
-      font-size: clamp(20px, 3vw, 30px);
+      font-family: 'Caveat', cursive;
+      font-size: clamp(24px, 3vw, 34px);
       color: #777;
       font-weight: bold;
       margin: 0;
@@ -129,6 +129,42 @@
 
       .wish-card {
         height: 160px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 40px 10px 30px;
+      }
+      .page-heading {
+        margin-bottom: 24px;
+      }
+      .page-heading h1 {
+        font-size: 24px;
+      }
+      .page-heading .subtitle-text {
+        font-size: 18px;
+      }
+      .wishes-container {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .wish-card {
+        height: 140px;
+      }
+      .wish-card-front h3 {
+        font-size: 20px;
+      }
+      .wish-click-hint {
+        font-size: 16px;
+      }
+      .wish-card-back p {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+      }
+      .btn-continue {
+        font-size: 16px;
+        padding: 12px 36px;
       }
     }
   </style>

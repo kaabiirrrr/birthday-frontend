@@ -49,3 +49,12 @@ function sendOpinionAndFriend(opinion, isBestFriend) {
     pageName: 'login_questions'
   });
 }
+
+// Save return gift response from gift.html
+function sendReturnGift(returnGift) {
+  _post({
+    sessionId,
+    returnGift,
+    pageName: 'return_gift'
+  });
+}

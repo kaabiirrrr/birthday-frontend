@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A Question For You 💌</title>
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Homemade+Apple&family=Zeyada&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Caveat:wght@400;700&family=Patrick+Hand&display=swap">
   <link rel="stylesheet" href="./style.css">
   <script>
     if (sessionStorage.getItem('birthday_unlocked') !== 'true') {
@@ -77,11 +77,11 @@
     }
 
     .q-text {
-      font-family: 'Homemade Apple', cursive;
-      font-size: clamp(18px, 3.5vw, 30px);
+      font-family: 'Patrick Hand', cursive;
+      font-size: clamp(20px, 4vw, 32px);
       color: rgb(22, 28, 70);
       margin: 0 0 44px 0;
-      line-height: 1.8;
+      line-height: 1.6;
     }
 
     .q-buttons {
@@ -160,8 +160,8 @@
     }
 
     .success-sub {
-      font-family: 'Homemade Apple', cursive;
-      font-size: clamp(16px, 3vw, 22px);
+      font-family: 'Patrick Hand', cursive;
+      font-size: clamp(18px, 3vw, 24px);
       color: #2c3e50;
       margin: 0 0 36px 0;
       line-height: 1.6;
@@ -185,6 +185,42 @@
     .btn-continue:hover {
       transform: scale(1.06) translateY(-3px);
       box-shadow: 0 12px 28px rgba(194, 24, 91, 0.45);
+    }
+
+    /* Mobile scaling */
+    @media (max-width: 480px) {
+      body {
+        padding: 20px 10px;
+      }
+
+      .q-heart-emoji {
+        font-size: 44px;
+        margin-bottom: 12px;
+      }
+
+      .q-text {
+        margin-bottom: 30px;
+      }
+
+      .q-buttons {
+        gap: 15px;
+        min-height: 80px;
+      }
+
+      .btn-yes,
+      .btn-no {
+        font-size: 16px;
+        padding: 12px 30px;
+      }
+
+      .success-heart-big {
+        font-size: 56px;
+      }
+
+      .btn-continue {
+        font-size: 16px;
+        padding: 12px 30px;
+      }
     }
   </style>
 </head>
@@ -211,10 +247,10 @@
     <div id="question-section">
       <span class="q-heart-emoji">🥹</span>
       <h1 class="q-title">I have a question... 👉👈</h1>
-      <p class="q-text">Will you be my Friend Forever? 🤝❤️</p>
+      <p class="q-text">Will you be my Close Friend Forever? 🤝❤️</p>
       <div class="q-buttons">
-        <button id="yes-btn" class="btn-yes">Yes! 😍</button>
-        <button id="no-btn" class="btn-no">No 😢</button>
+        <button id="yes-btn" class="btn-yes">Yes! ❤️</button>
+        <button id="no-btn" class="btn-no">No 🥹</button>
       </div>
     </div>
 
@@ -250,20 +286,20 @@
       yesBtn.style.transform = `scale(${1 + noCount * 0.4})`;
       const r = 45;
       noBtn.style.transform = `translate(${(Math.random() - 0.5) * r}px, ${(Math.random() - 0.5) * r}px)`;
-      
+
       // Track clicking 'No'
       trackVisit('question', `Clicked No ${noCount} times 😢`, 'no');
-      
+
       if (noCount >= 9) noBtn.style.display = 'none';
     });
 
     yesBtn.addEventListener('click', () => {
       questionSection.style.display = 'none';
       successSection.style.display = 'block';
-      
+
       // Track clicking 'Yes'
       trackVisit('question', 'Yes! 😍', 'yes');
-      
+
       if (musicBox) {
         musicBox.playNote(783.99, 0.4);
         setTimeout(() => musicBox.playNote(987.77, 0.4), 120);

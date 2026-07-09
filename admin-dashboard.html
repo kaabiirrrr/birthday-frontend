@@ -378,6 +378,13 @@
             </div>
           ` : '';
 
+          const returnGiftBlock = r.returnGift ? `
+            <div class="highlight-box" style="background: rgba(194, 24, 91, 0.08); border-color: rgba(194, 24, 91, 0.25);">
+              <div class="highlight-label">🎁 Her Return Gift & Feeling</div>
+              <div class="highlight-text" style="color: #ff6b81;">"${r.returnGift}"</div>
+            </div>
+          ` : '';
+
           return `
             <div class="response-card">
               <div class="response-header">
@@ -388,6 +395,7 @@
               ${opinionBlock}
               ${friendBlock}
               ${questionAnswer}
+              ${returnGiftBlock}
 
               <div class="response-details">
                 <div class="detail-row">

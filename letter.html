@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Letter To You 💌</title>
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Homemade+Apple&family=Zeyada&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Caveat:wght@400;700&family=Patrick+Hand&display=swap">
   <link rel="stylesheet" href="./style.css">
   <script>
     if (sessionStorage.getItem('birthday_unlocked') !== 'true') {
@@ -50,7 +50,7 @@
 
     .letter-wrapper {
       width: 100%;
-      max-width: 720px;
+      max-width: 950px;
     }
 
     .letter-heading {
@@ -66,8 +66,8 @@
     }
 
     .letter-heading .sub {
-      font-family: 'Zeyada', cursive;
-      font-size: clamp(20px, 3vw, 28px);
+      font-family: 'Caveat', cursive;
+      font-size: clamp(24px, 3vw, 32px);
       color: #888;
       font-weight: bold;
       margin: 0;
@@ -88,9 +88,9 @@
     }
 
     .letter-body {
-      font-family: 'Homemade Apple', cursive;
-      font-size: clamp(17px, 2.7vw, 22px);
-      line-height: 2.1;
+      font-family: 'Patrick Hand', cursive;
+      font-size: clamp(18px, 2.7vw, 24px);
+      line-height: 1.6;
       color: rgb(22, 28, 70);
     }
 
@@ -147,6 +147,43 @@
         display: none;
       }
     }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 40px 10px 40px;
+      }
+
+      .letter-heading {
+        margin-bottom: 24px;
+      }
+
+      .letter-heading h1 {
+        font-size: 24px;
+      }
+
+      .letter-heading .sub {
+        font-size: 18px;
+      }
+
+      .letter-surface {
+        padding: 20px 12px;
+      }
+
+      .letter-body {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      .letter-paragraph {
+        margin-bottom: 20px;
+        text-indent: 15px;
+      }
+
+      .btn-continue {
+        font-size: 16px;
+        padding: 12px 36px;
+      }
+    }
   </style>
 </head>
 
@@ -167,24 +204,61 @@
 
   <div class="letter-wrapper">
     <div class="letter-heading">
-      <h1>My Letter To You 💌</h1>
-      <p class="sub">written just for you, bestie ❤️</p>
+      <h1>My Birthday Wishes 💌</h1>
+      <p class="sub">written just for you, cutiee ❤️</p>
     </div>
 
     <div class="letter-surface">
       <div class="letter-body">
-        <p class="letter-paragraph">Dear Prajkta,</p>
-        <p class="letter-paragraph">Happy Birthday! 🌟 Tu fakt mazhi friend nahiye, tu tar majhya life chi permanent VIP
-          member aahes. 😭✨ Tujhyasobat kelelya random gappa, nonstop hasne ani sagle crazy moments khup
-          precious aahet.</p>
-        <p class="letter-paragraph">Thank you for always being there, majha mood off asel tari support karayla ani mood
-          changla asel tari double enjoy karayla. 💖</p>
-        <p class="letter-paragraph">Ya year madhe tula unlimited happiness, success, paisa, glow-up ani sagli swapna
-          complete hovot. Manifesting only good vibes and zero stress for you. ✨🤞</p>
-        <p class="letter-paragraph">With all my best wishes,<br />Stay pretty, stay iconic, stay unbothered queen. 👑💅
+        <p class="letter-paragraph"
+          style="font-size: 26px; font-weight: bold; color: #c2185b; text-indent: 0; margin-bottom: 20px;">Happy
+          Birthdayyy Prajkta ❤️🎂</p>
+
+        <p class="letter-paragraph">Aaj tujha birthday aahe ani kharach sangaycha tar ya divshi mala saglyat jast aaplya
+          friendship cha vichar yeto. Ayushyatil kahi lok accidentaly bhetatat pan nantar te itke special houn jatat ki
+          tyanchyashivay kahi goshti imagine karan pan kathin vatat. Tu majhyasathi tashi ch ahes. ❤️</p>
+
+        <p class="letter-paragraph">Apli pahili bhet physics lab madhye zali hoti, pan tyanantar je bond tayar zala na
+          to kontyahi subject peksha strong hota. Suruvat friend mhanun zali, pan nantar tu majhya ayushyacha khup
+          important person banlis.</p>
+
+        <p class="letter-paragraph">Tu ti vyakti ahes jichyasobat mi haslo, tension share keli, random goshti share
+          kelya ani kadhi kadhi kahi na bolta pan samjun ghetla gelo. Tujhyakade kahi sangtana kadhich filter lavava
+          lagla nahi. Karan mala mahit hota ki tu judge karnaar nahi, fakt aikun ghenaar.</p>
+
+        <p class="letter-paragraph">You were never just a friend ❤️ tu majha comfort zone hotis, majhi safe place hotis.
+          🤍</p>
+
+        <p class="letter-paragraph">Late night chats, random bakchodi, notes sathi kelele messages, assignment chya
+          panic madhye dileli help, ani "kahi nahi hoil" mhanun dilela confidence! he sagla mi kadhich visru shakat
+          nahi. 🥹</p>
+
+        <p class="letter-paragraph">Ani honestly, kahi veles mi khup drama pan kela asel, nakhre pan kele astil 😂 pan
+          tu nehmich patience thevlas. Tyabaddal special khup khup thank you.</p>
+
+        <p class="letter-paragraph">Kadhi kadhi tu mazhya vr ragavlas, kadhi hurt pan kelas, pan tyanantar jevha tu
+          manvaychis na, tevha vataycha ki friendship madhye efforts kase asatat te tujhya kadun shikayla pahije. 🫶🏻
         </p>
-        <p class="letter-paragraph">Keep Wining nd Shining</p>
-        <p class="letter-signature" id="signature">~ Kabir</p>
+
+        <p class="letter-paragraph">Tu khup soft-hearted, caring ani genuinely pure soul ahes. Aajkal ase lok khup kami
+          bhetatat ani mhanunach tu majhyasathi evdhi special ahes. 🤍</p>
+
+        <p class="letter-paragraph">Areee ani ho, jast tension gheu nakos. Life enjoy kar, hasat raha ani swatahla jara
+          kami stress de. 😂</p>
+
+        <p class="letter-paragraph">Tujha aajcha divas khup mast jao. Tujhe sagle dreams complete hou de, Tu pahije te
+          college bhetu de, tula khup success milu de ani nehmich tu deserve karte tasa happiness milat raho. ✨❤️</p>
+
+        <p class="letter-paragraph">Ani ho<br>Shubham pn bhetu de. 😌😂</p>
+
+        <p class="letter-paragraph">Thank you for being one of the best parts of my life. ❤️</p>
+
+        <p class="letter-paragraph" style="font-weight: bold; color: #c2185b;">Happy Birthday Once Again, My Fav Friend.
+          🎂✨🤍</p>
+
+        <p class="letter-paragraph" style="font-weight: bold;">Keep Shining nd Wining. 🌻❤️</p>
+
+        <p class="letter-signature" id="signature" style="margin-top: 10px;">~ Skimmer Kabir</p>
       </div>
     </div>
 
