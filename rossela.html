@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A Sweet Surprise 🍫</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Caveat:wght@400;700&family=Patrick+Hand&display=swap">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Caveat:wght@400;700&family=Patrick+Hand&display=swap">
   <link rel="stylesheet" href="./style.css">
   <script>
     if (sessionStorage.getItem('birthday_unlocked') !== 'true') {
@@ -14,9 +15,19 @@
   </script>
   <script src="tracker.js"></script>
   <style>
-    p { font-family: inherit; font-size: inherit; opacity: 1; user-select: auto; color: inherit; }
+    p {
+      font-family: inherit;
+      font-size: inherit;
+      opacity: 1;
+      user-select: auto;
+      color: inherit;
+    }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       min-height: 100vh;
@@ -46,15 +57,32 @@
       animation: floatUp linear infinite;
       opacity: 0;
       user-select: none;
-      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.18));
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.18));
     }
 
     @keyframes floatUp {
-      0%   { transform: translateY(110vh) rotate(-15deg); opacity: 0; }
-      5%   { opacity: 1; }
-      50%  { transform: translateY(50vh) rotate(15deg); opacity: 1; }
-      90%  { opacity: 0.9; }
-      100% { transform: translateY(-150px) rotate(40deg); opacity: 0; }
+      0% {
+        transform: translateY(110vh) rotate(-15deg);
+        opacity: 0;
+      }
+
+      5% {
+        opacity: 1;
+      }
+
+      50% {
+        transform: translateY(50vh) rotate(15deg);
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 0.9;
+      }
+
+      100% {
+        transform: translateY(-150px) rotate(40deg);
+        opacity: 0;
+      }
     }
 
     /* ---- Centre Content ---- */
@@ -67,8 +95,15 @@
     }
 
     @keyframes popIn {
-      from { opacity: 0; transform: scale(0.8) translateY(20px); }
-      to   { opacity: 1; transform: scale(1) translateY(0); }
+      from {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
     }
 
     .hero-choco {
@@ -76,12 +111,17 @@
       display: block;
       margin: 0 auto 20px;
       animation: heroFloat 2.4s infinite alternate ease-in-out;
-      filter: drop-shadow(0 10px 24px rgba(0,0,0,0.2));
+      filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.2));
     }
 
     @keyframes heroFloat {
-      from { transform: translateY(0) rotate(-4deg) scale(1); }
-      to   { transform: translateY(-14px) rotate(4deg) scale(1.05); }
+      from {
+        transform: translateY(0) rotate(-4deg) scale(1);
+      }
+
+      to {
+        transform: translateY(-14px) rotate(4deg) scale(1.05);
+      }
     }
 
     .page-title {
@@ -89,7 +129,7 @@
       font-size: clamp(24px, 5vw, 44px);
       color: #8b1a1a;
       margin-bottom: 8px;
-      text-shadow: 1px 2px 0 rgba(255,255,255,0.65);
+      text-shadow: 1px 2px 0 rgba(255, 255, 255, 0.65);
     }
 
     .page-sub {
@@ -145,25 +185,31 @@
       body {
         padding: 20px 10px;
       }
+
       .content {
         padding: 20px 12px;
       }
+
       .hero-choco {
         margin-bottom: 12px;
       }
+
       .page-title {
         font-size: 24px;
         line-height: 1.3;
       }
+
       .page-sub {
         font-size: 18px;
         margin-bottom: 16px;
       }
+
       .choco-note {
         font-size: 14px;
         line-height: 1.7;
         margin-bottom: 24px;
       }
+
       .btn-end {
         font-size: 15px;
         padding: 10px 28px;
@@ -193,14 +239,15 @@
 
   <!-- Centre message -->
   <div class="content">
-    <img src="images/Screenshot_2026-07-09_at_3.48.16_PM-removebg-preview.png" alt="Rosella Chocolate" class="hero-choco">
+    <img src="images/Screenshot_2026-07-09_at_3.48.16_PM-removebg-preview.png" alt="Rosella Chocolate"
+      class="hero-choco">
     <h1 class="page-title">A Rosella Just For You! 🌹</h1>
     <p class="page-sub">Because you deserve all the sweetness in the world ❤️</p>
     <p class="choco-note">
       Just like a Rosella chocolate — you are soft on the outside,<br>
       sweet on the inside, and absolutely irresistible. 🌹✨<br><br>
-      Happy Birthday, bestie! Hope every day is as sweet<br>
-      as a Rosella shared with your best friend. 🎂
+      Happy Birthday, Cutiepie! Hope every day is as sweet<br>
+      as a Rosella shared with your close friend. 🎂
     </p>
     <a href="gift.html" class="btn-end">Give a Return Gift 🎁</a>
   </div>
@@ -217,10 +264,10 @@
       el.src = imgSrc;
       el.alt = 'Rosella';
 
-      const left  = Math.random() * 100;
-      const size  = 55 + Math.random() * 80;   // 55px – 135px
+      const left = Math.random() * 100;
+      const size = 55 + Math.random() * 80;   // 55px – 135px
       const delay = Math.random() * 10;
-      const dur   = 6 + Math.random() * 8;
+      const dur = 6 + Math.random() * 8;
 
       el.style.cssText = `
         left: ${left}vw;
@@ -263,9 +310,9 @@
 
     const musicBox = new MusicBox();
     const musicToggle = document.getElementById('music-toggle');
-    const visualizer  = document.getElementById('visualizer');
-    const musicIcon   = musicToggle.querySelector('.music-icon');
-    const musicText   = musicToggle.querySelector('.music-text');
+    const visualizer = document.getElementById('visualizer');
+    const musicIcon = musicToggle.querySelector('.music-icon');
+    const musicText = musicToggle.querySelector('.music-text');
 
     function updateMusicUI(playing) {
       if (playing) {
