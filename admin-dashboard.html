@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Responses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Short+Stack&display=swap">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Short Stack', cursive;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a, #0f1e3d, #020617);
+      color: #f1f5f9;
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header-bar {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 20px;
+    }
+
+    .header-title h1 {
+      font-size: 2.2rem;
+      color: #ff6b81;
+    }
+
+    .header-title p {
+      color: #64748b;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .btn-logout {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Short Stack', cursive;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .btn-logout:hover {
+      background: rgba(239, 68, 68, 0.2);
+    }
+
+    .main-container {
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(8px);
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #ff6b81;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-top: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .dashboard-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      color: #fff;
+    }
+
+    .btn-action {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Short Stack', cursive;
+      font-size: 14px;
+      transition: all 0.2s;
+      margin-left: 8px;
+    }
+
+    .btn-action:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    .btn-clear {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      color: #f87171;
+    }
+
+    .btn-clear:hover {
+      background: rgba(239, 68, 68, 0.2);
+    }
+
+    .responses-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .response-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(8px);
+      transition: all 0.3s;
+    }
+
+    .response-card:hover {
+      border-color: rgba(255, 107, 129, 0.3);
+      box-shadow: 0 8px 30px rgba(255, 107, 129, 0.05);
+    }
+
+    .response-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .response-answer {
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+
+    .response-answer.yes { color: #4caf50; }
+    .response-answer.no { color: #f44336; }
+    .response-answer.visited { color: #94a3b8; }
+
+    .response-time {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    .response-details {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 16px;
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.8;
+    }
+
+    .detail-row {
+      display: flex;
+      margin-bottom: 8px;
+    }
+
+    .detail-label {
+      width: 140px;
+      color: #64748b;
+      font-weight: bold;
+    }
+
+    .badge-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      background: rgba(255, 107, 129, 0.12);
+      color: #ff6b81;
+      border: 1px solid rgba(255, 107, 129, 0.2);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 80px 20px;
+      color: #64748b;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dotted rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+    }
+
+    .empty-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+    }
+
+    .highlight-box {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+    }
+
+    .highlight-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+
+    .highlight-text {
+      font-size: 1.1rem;
+      color: #f1f5f9;
+      line-height: 1.6;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-bar">
+    <div class="header-title">
+      <h1>🎂 Response Dashboard</h1>
+      <p>Real-time analytics for your birthday website surprise</p>
+    </div>
+    <button class="btn-logout" onclick="logout()">Logout 🔐</button>
+  </div>
+
+  <div class="main-container">
+    <div class="stats-grid" id="stats-container">
+      <!-- Stats will render here -->
+    </div>
+
+    <div class="dashboard-actions">
+      <h2 class="section-title">Timeline of Visits</h2>
+      <div>
+        <button class="btn-action" onclick="fetchData()">🔄 Refresh</button>
+        <button class="btn-action btn-clear" onclick="clearData()">🗑️ Clear All</button>
+      </div>
+    </div>
+
+    <div class="responses-list" id="responses-container">
+      <!-- Responses will render here -->
+    </div>
+  </div>
+
+  <script>
+    // Authentication Check
+    const secret = sessionStorage.getItem('admin_secret');
+    const apiUrl = sessionStorage.getItem('admin_api_url');
+
+    if (!secret || !apiUrl) {
+      window.location.href = 'admin.html';
+    }
+
+    window.addEventListener('DOMContentLoaded', fetchData);
+
+    async function fetchData() {
+      const statsContainer = document.getElementById('stats-container');
+      const responsesContainer = document.getElementById('responses-container');
+
+      statsContainer.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #aaa;">Loading stats...</div>';
+      responsesContainer.innerHTML = '<div class="empty-state">Loading responses...</div>';
+
+      try {
+        const res = await fetch(`${apiUrl}/api/responses?secret=${encodeURIComponent(secret)}`);
+        
+        if (res.status === 401) {
+          alert('Session expired or unauthorized. Logging out.');
+          logout();
+          return;
+        }
+
+        const data = await res.json();
+
+        if (!data.responses || data.responses.length === 0) {
+          statsContainer.innerHTML = `
+            <div class="stat-card">
+              <div class="stat-value">0</div>
+              <div class="stat-label">Total Visits</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" style="color:#4caf50">0</div>
+              <div class="stat-label">Said Yes!</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" style="color:#f44336">0</div>
+              <div class="stat-label">Said No</div>
+            </div>
+          `;
+          responsesContainer.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-icon">😴</div>
+              <p>No activity recorded yet.</p>
+              <p style="font-size:12px; margin-top:4px; color:#475569">Send her the website link to see responses here!</p>
+            </div>
+          `;
+          return;
+        }
+
+        const yesCount = data.responses.filter(r => r.answerRaw === 'yes').length;
+        const noCount  = data.responses.filter(r => r.answerRaw === 'no').length;
+        const lastVisit = new Date(data.responses[0].timestamp).toLocaleString('en-IN');
+
+        statsContainer.innerHTML = `
+          <div class="stat-card">
+            <div class="stat-value">${data.total}</div>
+            <div class="stat-label">Total Visits</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" style="color:#4caf50">${yesCount}</div>
+            <div class="stat-label">Said Yes!</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" style="color:#f44336">${noCount}</div>
+            <div class="stat-label">Said No</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" style="font-size:1.15rem; height:40px; display:flex; align-items:center; justify-content:center;">${lastVisit}</div>
+            <div class="stat-label">Latest Activity</div>
+          </div>
+        `;
+
+        responsesContainer.innerHTML = data.responses.map(r => {
+          let timeFormatted = new Date(r.timestamp).toLocaleString('en-IN');
+          
+          const opinionBlock = r.opinion ? `
+            <div class="highlight-box">
+              <div class="highlight-label">💬 Her Opinion About Kabir</div>
+              <div class="highlight-text">"${r.opinion}"</div>
+            </div>
+          ` : '';
+
+          const friendBlock = r.isBestFriend ? `
+            <div class="highlight-box" style="background: rgba(76,175,80,0.08); border-color: rgba(76,175,80,0.25);">
+              <div class="highlight-label">🤝 Is Kabir Her Best Friend?</div>
+              <div class="highlight-text" style="color:#4caf50;">${r.isBestFriend}</div>
+            </div>
+          ` : '';
+
+          const questionAnswer = r.answerRaw === 'yes' || r.answerRaw === 'no' ? `
+            <div class="highlight-box" style="background: rgba(255,107,129,0.08); border-color: rgba(255,107,129,0.25);">
+              <div class="highlight-label">💌 Will She Be Friends Forever?</div>
+              <div class="highlight-text" style="color: ${r.answerRaw === 'yes' ? '#4caf50' : '#f44336'};">${r.answer}</div>
+            </div>
+          ` : '';
+
+          return `
+            <div class="response-card">
+              <div class="response-header">
+                <div class="response-answer ${r.answerRaw}">${r.answer}</div>
+                <div class="response-time">${timeFormatted}</div>
+              </div>
+
+              ${opinionBlock}
+              ${friendBlock}
+              ${questionAnswer}
+
+              <div class="response-details">
+                <div class="detail-row">
+                  <div class="detail-label">Session ID</div>
+                  <div><code>${r.sessionId}</code></div>
+                </div>
+                <div class="detail-row">
+                  <div class="detail-label">Device Info</div>
+                  <div>${r.userAgent ? r.userAgent.substring(0, 100) : 'Unknown'}</div>
+                </div>
+                <div class="detail-row">
+                  <div class="detail-label">Pages Visited</div>
+                  <div class="badge-container">
+                    ${(r.pagesVisited || []).map(p => `<span class="badge">${p}</span>`).join('') || '<span style="color:#475569">None yet</span>'}
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      } catch (err) {
+        responsesContainer.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">❌</div>
+            <p>Could not load responses.</p>
+            <p style="font-size:12px; margin-top:4px; color:#ef4444">Connection to backend server failed.</p>
+          </div>
+        `;
+      }
+    }
+
+    async function clearData() {
+      if (!confirm('Are you sure you want to permanently clear all responses? This cannot be undone!')) return;
+      
+      try {
+        const res = await fetch(`${apiUrl}/api/responses?secret=${encodeURIComponent(secret)}`, {
+          method: 'DELETE'
+        });
+
+        if (res.ok) {
+          alert('Responses cleared successfully!');
+          fetchData();
+        } else {
+          alert('Failed to clear responses.');
+        }
+      } catch (e) {
+        alert('Error connecting to backend.');
+      }
+    }
+
+    function logout() {
+      sessionStorage.removeItem('admin_secret');
+      sessionStorage.removeItem('admin_api_url');
+      window.location.href = 'admin.html';
+    }
+  </script>
+</body>
+</html>

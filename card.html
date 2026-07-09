@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Special Surprise ❤️</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Short+Stack&amp;family=Homemade+Apple&amp;display=swap">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="card-page">
+  <div class="card-container">
+    <!-- Back to Stack / Close Page Button -->
+    <button class="close-btn" id="close-card-btn" aria-label="Back to Stack">&times;</button>
+    
+    <!-- Audio Synth Control -->
+    <div class="music-controls">
+      <button id="music-toggle" class="music-btn" aria-label="Toggle music">
+        <span class="music-icon">🎵</span>
+        <span class="music-text">Play Sound</span>
+      </button>
+      <div class="music-visualizer" id="visualizer">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+
+    <header class="dialog-header">
+      <h1>Happy Birthday! 🎂✨</h1>
+      <p class="subtitle">A special surprise just for you</p>
+    </header>
+
+    <!-- Tabs Navigation -->
+    <nav class="dialog-tabs">
+      <button class="tab-btn" data-tab="tab-letter">My Letter 💌</button>
+      <button class="tab-btn" data-tab="tab-photos">Memories 📸</button>
+      <button class="tab-btn" data-tab="tab-wishes">Wishes ✨</button>
+      <button class="tab-btn active" data-tab="tab-question">Besties? 🤝</button>
+    </nav>
+
+    <!-- Tab Content Area -->
+    <div class="tab-content">
+      <!-- Tab 1: Letter -->
+      <div id="tab-letter" class="tab-pane">
+        <div class="letter-paper">
+          <div class="letter-body">
+            <p class="letter-paragraph">Dear Bestie,</p>
+            <p class="letter-paragraph">Happy Birthday! 🌟 I wanted to make something unique to celebrate your special day and put a smile on your face. Having you as a friend makes everything a bit brighter and happier.</p>
+            <p class="letter-paragraph">You are one of the most amazing, kind, and supportive people I know. Moving these papers is just a little reminder of the layers of joy you bring to everyone around you. ❤️</p>
+            <p class="letter-paragraph">I hope this year brings you all the happiness, warmth, and laughter you deserve. May all your wildest dreams and goals come true!</p>
+            <p class="letter-paragraph">With all my best wishes,</p>
+            <p class="letter-signature">Kabir</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Memories -->
+      <div id="tab-photos" class="tab-pane">
+        <div class="photos-grid">
+          <div class="polaroid-card">
+            <div class="polaroid-img-wrapper">
+              <img src="images/1.jpeg" alt="Memory 1" />
+            </div>
+            <div class="polaroid-caption">Best Friend 🤝</div>
+          </div>
+          
+          <div class="polaroid-card">
+            <div class="polaroid-img-wrapper">
+              <img src="images/2.jpeg" alt="Memory 2" />
+            </div>
+            <div class="polaroid-caption">So Beautiful ✨</div>
+          </div>
+          
+          <div class="polaroid-card">
+            <div class="polaroid-img-wrapper">
+              <img src="images/3.jpg" alt="Memory 3" />
+            </div>
+            <div class="polaroid-caption">Cutest Smile ❤️</div>
+          </div>
+
+          <div class="polaroid-card">
+            <div class="polaroid-img-wrapper">
+              <img src="images/bg.jpeg" alt="Memory 4" />
+            </div>
+            <div class="polaroid-caption">A Beautiful Day 🌸</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Wishes -->
+      <div id="tab-wishes" class="tab-pane">
+        <div class="wishes-container">
+          <div class="wish-card">
+            <div class="wish-card-inner">
+              <div class="wish-card-front">
+                <h3>Wish #1 💫</h3>
+                <span class="wish-click-hint">Hover to flip</span>
+              </div>
+              <div class="wish-card-back">
+                <p>May your days be filled with endless smiles, warmth, and the kind of laughter that lights up any room! ☀️</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="wish-card">
+            <div class="wish-card-inner">
+              <div class="wish-card-front">
+                <h3>Wish #2 🌸</h3>
+                <span class="wish-click-hint">Hover to flip</span>
+              </div>
+              <div class="wish-card-back">
+                <p>May you always be surrounded by love, true friendships, and people who appreciate you for the amazing person you are! 💖</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="wish-card">
+            <div class="wish-card-inner">
+              <div class="wish-card-front">
+                <h3>Wish #3 🚀</h3>
+                <span class="wish-click-hint">Hover to flip</span>
+              </div>
+              <div class="wish-card-back">
+                <p>May this new year of your life unlock new adventures, bring exciting success, and fulfill every wish in your heart! 🌠</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="wish-card">
+            <div class="wish-card-inner">
+              <div class="wish-card-front">
+                <h3>Wish #4 🎨</h3>
+                <span class="wish-click-hint">Hover to flip</span>
+              </div>
+              <div class="wish-card-back">
+                <p>May you never lose your beautiful sparkle, your kindness, and your unique magic. Stay wonderful! ✨</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Question -->
+      <div id="tab-question" class="tab-pane active">
+        <div class="letter-paper question-box">
+          <div id="question-content">
+            <h2 class="question-title">I have a question... 👉👈</h2>
+            <p class="question-text">Will you be my Best Friend Forever? 🤝✨</p>
+            <div class="question-buttons">
+              <button id="yes-btn" class="cute-btn yes-btn">Yes! 😍</button>
+              <button id="no-btn" class="cute-btn no-btn">No 😢</button>
+            </div>
+          </div>
+          <div id="success-content" class="success-content" style="display: none;">
+            <div class="success-heart">❤️</div>
+            <h2>BESTIES FOREVER! 🤝❤️</h2>
+            <p>I knew you'd say Yes! You are the absolute best! ✨</p>
+            <p class="success-subtext">Best friends forever and always! 💑</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Fullscreen Lightbox for Images -->
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close" id="close-lightbox-btn">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" alt="Enlarged photo">
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+  </div>
+
+  <script src="./card-script.js"></script>
+</body>
+
+</html>

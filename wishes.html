@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Wishes For You ✨</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Homemade+Apple&family=Zeyada&display=swap">
+  <link rel="stylesheet" href="./style.css">
+  <script>
+    if (sessionStorage.getItem('birthday_unlocked') !== 'true') {
+      window.location.href = 'index.html';
+    }
+  </script>
+  <script src="tracker.js"></script>
+  <style>
+    p {
+      font-family: inherit;
+      font-size: inherit;
+      opacity: 1;
+      user-select: auto;
+      color: inherit;
+    }
+
+    body {
+      min-height: 100vh;
+      height: auto !important;
+      margin: 0;
+      background-image: url("https://www.psdgraphics.com/wp-content/uploads/2022/01/white-math-paper-texture.jpg");
+      background-size: 1000px;
+      background-position: center;
+      padding: 60px 20px 40px;
+      box-sizing: border-box;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start !important;
+    }
+
+    .top-music {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .page-heading {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-heading h1 {
+      font-family: 'Short Stack', cursive;
+      font-size: clamp(28px, 5vw, 50px);
+      color: #c2185b;
+      margin: 0 0 8px 0;
+    }
+
+    .page-heading .subtitle-text {
+      font-family: 'Zeyada', cursive;
+      font-size: clamp(20px, 3vw, 30px);
+      color: #777;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    /* Override wish card grid to fill page */
+    .wishes-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 32px;
+      padding: 10px;
+      width: 100%;
+      max-width: 960px;
+      margin-bottom: 50px;
+    }
+
+    .wish-card {
+      height: 230px;
+    }
+
+    .wish-card-front, .wish-card-back {
+      border-radius: 4px !important;
+    }
+
+    .wish-card-front h3 {
+      font-size: 24px;
+    }
+
+    .wish-click-hint {
+      font-size: 20px;
+    }
+
+    .wish-card-back p {
+      font-size: 15px !important;
+      line-height: 1.6 !important;
+    }
+
+    .btn-continue {
+      font-family: 'Short Stack', cursive;
+      font-size: 18px;
+      padding: 16px 48px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff6b81, #c2185b);
+      color: white;
+      box-shadow: 0 6px 20px rgba(194, 24, 91, 0.35);
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-continue:hover {
+      transform: scale(1.06) translateY(-3px);
+      box-shadow: 0 12px 28px rgba(194, 24, 91, 0.45);
+    }
+
+    @media (max-width: 600px) {
+      .wishes-container {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .wish-card {
+        height: 160px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Music Controls -->
+  <div class="top-music">
+    <button id="music-toggle" class="music-btn" aria-label="Toggle music">
+      <span class="music-icon">🎵</span>
+      <span class="music-text">Play Sound</span>
+    </button>
+    <div class="music-visualizer" id="visualizer">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+
+  <div class="page-heading">
+    <h1>My Wishes For You ✨</h1>
+    <p class="subtitle-text">Hover over each card to reveal ❤️</p>
+  </div>
+
+  <div class="wishes-container">
+    <div class="wish-card">
+      <div class="wish-card-inner">
+        <div class="wish-card-front">
+          <h3>Wish #1 🌹</h3>
+          <span class="wish-click-hint">Hover to flip</span>
+        </div>
+        <div class="wish-card-back">
+          <p>May your days be filled with endless smiles, warmth, and the kind of laughter that lights up any room! ☀️
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="wish-card">
+      <div class="wish-card-inner">
+        <div class="wish-card-front">
+          <h3>Wish #2 🌸</h3>
+          <span class="wish-click-hint">Hover to flip</span>
+        </div>
+        <div class="wish-card-back">
+          <p>May you always be surrounded by love, true friendships, and people who appreciate you for the amazing
+            person you are! 💖</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="wish-card">
+      <div class="wish-card-inner">
+        <div class="wish-card-front">
+          <h3>Wish #3 🌼</h3>
+          <span class="wish-click-hint">Hover to flip</span>
+        </div>
+        <div class="wish-card-back">
+          <p>May this new year of your life unlock new adventures, bring exciting success, and fulfill every wish in
+            your heart! 🌠</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="wish-card">
+      <div class="wish-card-inner">
+        <div class="wish-card-front">
+          <h3>Wish #4 🌷</h3>
+          <span class="wish-click-hint">Hover to flip</span>
+        </div>
+        <div class="wish-card-back">
+          <p>May you never lose your beautiful sparkle, your kindness, and your unique magic. Stay wonderful! ✨</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="wish-card">
+      <div class="wish-card-inner">
+        <div class="wish-card-front">
+          <h3>Wish #5 🪻</h3>
+          <span class="wish-click-hint">Hover to flip</span>
+        </div>
+        <div class="wish-card-back">
+          <p>May every morning bring you fresh energy, good vibes, and reasons to smile bigger than the day before! 🌅
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="wish-card">
+      <div class="wish-card-inner">
+        <div class="wish-card-front">
+          <h3>Wish #6 🌺</h3>
+          <span class="wish-click-hint">Hover to flip</span>
+        </div>
+        <div class="wish-card-back">
+          <p>May this birthday be the beginning of the best chapter of your life — full of health, joy, and everything
+            you deserve! 🎂🥳</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="memories.html" class="btn-continue">See Our Memories 📸</a>
+
+  <script>
+    /* Mobile flip on tap */
+    document.querySelectorAll('.wish-card').forEach(c => {
+      c.addEventListener('click', () => c.classList.toggle('flipped'));
+    });
+
+    /* Music Player */
+    class MusicBox {
+      constructor() {
+        this.audio = new Audio('images/ishq_bulaava_bollywood.mp3');
+        this.audio.loop = true;
+        this.isPlaying = false;
+
+        // Restore time position if exists
+        const savedTime = sessionStorage.getItem('music_current_time');
+        if (savedTime) {
+          this.audio.currentTime = parseFloat(savedTime);
+        }
+
+        // Continuously update saved time
+        this.audio.addEventListener('timeupdate', () => {
+          sessionStorage.setItem('music_current_time', this.audio.currentTime);
+        });
+      }
+      start() {
+        this.isPlaying = true;
+        sessionStorage.setItem('music_is_playing', 'true');
+        this.audio.play().catch(err => console.log("Audio play blocked: " + err));
+      }
+      stop() {
+        this.isPlaying = false;
+        sessionStorage.setItem('music_is_playing', 'false');
+        this.audio.pause();
+      }
+    }
+
+    const musicBox = new MusicBox();
+    const musicToggle = document.getElementById('music-toggle');
+    const visualizer = document.getElementById('visualizer');
+    const musicIcon = musicToggle.querySelector('.music-icon');
+    const musicText = musicToggle.querySelector('.music-text');
+
+    function updateMusicUI(playing) {
+      if (playing) {
+        musicIcon.textContent = '⏸️'; musicText.textContent = 'Pause Sound';
+        musicToggle.classList.add('playing'); visualizer.classList.add('playing');
+      } else {
+        musicIcon.textContent = '🎵'; musicText.textContent = 'Play Sound';
+        musicToggle.classList.remove('playing'); visualizer.classList.remove('playing');
+      }
+    }
+
+    musicToggle.addEventListener('click', () => {
+      if (musicBox.isPlaying) {
+        musicBox.stop();
+        updateMusicUI(false);
+      } else {
+        musicBox.start();
+        updateMusicUI(true);
+      }
+    });
+
+    function startAutoplay() {
+      if (sessionStorage.getItem('music_is_playing') !== 'false') {
+        musicBox.start();
+        updateMusicUI(true);
+      }
+      window.removeEventListener('click', startAutoplay);
+      window.removeEventListener('touchstart', startAutoplay);
+    }
+
+    window.addEventListener('load', () => {
+      // Track page visit
+      trackVisit('wishes');
+
+      if (sessionStorage.getItem('music_is_playing') === 'false') {
+        updateMusicUI(false);
+        return;
+      }
+      setTimeout(() => {
+        musicBox.audio.play().then(() => {
+          musicBox.isPlaying = true;
+          sessionStorage.setItem('music_is_playing', 'true');
+          updateMusicUI(true);
+        }).catch(err => {
+          console.log("Autoplay blocked, waiting for interaction.");
+          window.addEventListener('click', startAutoplay);
+          window.addEventListener('touchstart', startAutoplay);
+        });
+      }, 100);
+    });
+  </script>
+</body>
+
+</html>

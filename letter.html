@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Letter To You 💌</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Homemade+Apple&family=Zeyada&display=swap">
+  <link rel="stylesheet" href="./style.css">
+  <script>
+    if (sessionStorage.getItem('birthday_unlocked') !== 'true') {
+      window.location.href = 'index.html';
+    }
+  </script>
+  <script src="tracker.js"></script>
+  <style>
+    p {
+      font-family: inherit;
+      font-size: inherit;
+      opacity: 1;
+      user-select: auto;
+      color: inherit;
+    }
+
+    body {
+      min-height: 100vh;
+      height: auto !important;
+      margin: 0;
+      background-image: url("https://www.psdgraphics.com/wp-content/uploads/2022/01/white-math-paper-texture.jpg");
+      background-size: 1000px;
+      background-position: center;
+      padding: 60px 20px 60px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start !important;
+    }
+
+    .top-music {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .letter-wrapper {
+      width: 100%;
+      max-width: 720px;
+    }
+
+    .letter-heading {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .letter-heading h1 {
+      font-family: 'Short Stack', cursive;
+      font-size: clamp(26px, 5vw, 48px);
+      color: #c2185b;
+      margin: 0 0 8px 0;
+    }
+
+    .letter-heading .sub {
+      font-family: 'Zeyada', cursive;
+      font-size: clamp(20px, 3vw, 28px);
+      color: #888;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    /* Letter Paper */
+    .letter-surface {
+      background: transparent;
+      box-shadow: none;
+      border: none;
+      padding: 40px 20px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .letter-surface::before {
+      display: none;
+    }
+
+    .letter-body {
+      font-family: 'Homemade Apple', cursive;
+      font-size: clamp(17px, 2.7vw, 22px);
+      line-height: 2.1;
+      color: rgb(22, 28, 70);
+    }
+
+    .letter-paragraph {
+      margin-bottom: 32px;
+      text-indent: 30px;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .letter-paragraph.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .letter-signature {
+      font-family: 'Homemade Apple', cursive;
+      font-size: clamp(22px, 3.5vw, 28px);
+      text-align: right;
+      margin-top: 40px;
+      margin-bottom: 0;
+      color: rgb(22, 28, 70);
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.7s ease-out 4.5s, transform 0.7s ease-out 4.5s;
+    }
+
+    .letter-signature.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .letter-hearts {
+      text-align: center;
+      font-size: 32px;
+      margin-top: 32px;
+      opacity: 0;
+      animation: none;
+      transition: opacity 0.6s ease-out 5.5s;
+    }
+
+    .letter-hearts.visible {
+      opacity: 1;
+    }
+
+    @media (max-width: 600px) {
+      .letter-surface {
+        padding: 30px 24px;
+        transform: none;
+      }
+
+      .letter-surface::before {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Music Controls -->
+  <div class="top-music">
+    <button id="music-toggle" class="music-btn" aria-label="Toggle music">
+      <span class="music-icon">🎵</span>
+      <span class="music-text">Play Sound</span>
+    </button>
+    <div class="music-visualizer" id="visualizer">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+
+  <div class="letter-wrapper">
+    <div class="letter-heading">
+      <h1>My Letter To You 💌</h1>
+      <p class="sub">written just for you, bestie ❤️</p>
+    </div>
+
+    <div class="letter-surface">
+      <div class="letter-body">
+        <p class="letter-paragraph">Dear Prajkta,</p>
+        <p class="letter-paragraph">Happy Birthday! 🌟 Tu fakt mazhi friend nahiye, tu tar majhya life chi permanent VIP
+          member aahes. 😭✨ Tujhyasobat kelelya random gappa, nonstop hasne ani sagle crazy moments khup
+          precious aahet.</p>
+        <p class="letter-paragraph">Thank you for always being there, majha mood off asel tari support karayla ani mood
+          changla asel tari double enjoy karayla. 💖</p>
+        <p class="letter-paragraph">Ya year madhe tula unlimited happiness, success, paisa, glow-up ani sagli swapna
+          complete hovot. Manifesting only good vibes and zero stress for you. ✨🤞</p>
+        <p class="letter-paragraph">With all my best wishes,<br />Stay pretty, stay iconic, stay unbothered queen. 👑💅
+        </p>
+        <p class="letter-paragraph">Keep Wining nd Shining</p>
+        <p class="letter-signature" id="signature">~ Kabir</p>
+      </div>
+    </div>
+
+    <div class="letter-hearts" id="hearts">❤️ 🥰 ❤️</div>
+
+    <div id="continue-btn-wrap"
+      style="text-align:center; margin-top: 36px; opacity:0; transition: opacity 0.8s ease 5.5s;">
+      <a href="rossela.html"
+        style="font-family:'Short Stack',cursive; font-size:18px; padding:14px 40px; border:none; border-radius:30px; cursor:pointer; background:linear-gradient(135deg,#ff6b81,#c2185b); color:white; box-shadow:0 6px 20px rgba(194,24,91,0.35); text-decoration:none; display:inline-block; transition:transform 0.2s ease,box-shadow 0.2s;">One
+        Last Surprise 🍫</a>
+    </div>
+  </div>
+
+  <script>
+    /* Animate letter paragraphs on load */
+    function animateLetter() {
+      const paragraphs = document.querySelectorAll('.letter-paragraph');
+      paragraphs.forEach((p, idx) => {
+        setTimeout(() => p.classList.add('visible'), idx * 900);
+      });
+      setTimeout(() => {
+        document.getElementById('signature').classList.add('visible');
+        document.getElementById('hearts').classList.add('visible');
+        const btnWrap = document.getElementById('continue-btn-wrap');
+        if (btnWrap) btnWrap.style.opacity = '1';
+      }, paragraphs.length * 900 + 300);
+    }
+
+    window.addEventListener('load', () => setTimeout(animateLetter, 300));
+
+    /* Music Player */
+    class MusicBox {
+      constructor() {
+        this.audio = new Audio('images/ishq_bulaava_bollywood.mp3');
+        this.audio.loop = true;
+        this.isPlaying = false;
+
+        // Restore time position if exists
+        const savedTime = sessionStorage.getItem('music_current_time');
+        if (savedTime) {
+          this.audio.currentTime = parseFloat(savedTime);
+        }
+
+        // Continuously update saved time
+        this.audio.addEventListener('timeupdate', () => {
+          sessionStorage.setItem('music_current_time', this.audio.currentTime);
+        });
+      }
+      start() {
+        this.isPlaying = true;
+        sessionStorage.setItem('music_is_playing', 'true');
+        this.audio.play().catch(err => console.log("Audio play blocked: " + err));
+      }
+      stop() {
+        this.isPlaying = false;
+        sessionStorage.setItem('music_is_playing', 'false');
+        this.audio.pause();
+      }
+    }
+
+    const musicBox = new MusicBox();
+    const musicToggle = document.getElementById('music-toggle');
+    const visualizer = document.getElementById('visualizer');
+    const musicIcon = musicToggle.querySelector('.music-icon');
+    const musicText = musicToggle.querySelector('.music-text');
+
+    function updateMusicUI(playing) {
+      if (playing) {
+        musicIcon.textContent = '⏸️'; musicText.textContent = 'Pause Sound';
+        musicToggle.classList.add('playing'); visualizer.classList.add('playing');
+      } else {
+        musicIcon.textContent = '🎵'; musicText.textContent = 'Play Sound';
+        musicToggle.classList.remove('playing'); visualizer.classList.remove('playing');
+      }
+    }
+
+    musicToggle.addEventListener('click', () => {
+      if (musicBox.isPlaying) {
+        musicBox.stop();
+        updateMusicUI(false);
+      } else {
+        musicBox.start();
+        updateMusicUI(true);
+      }
+    });
+
+    function startAutoplay() {
+      if (sessionStorage.getItem('music_is_playing') !== 'false') {
+        musicBox.start();
+        updateMusicUI(true);
+      }
+      window.removeEventListener('click', startAutoplay);
+      window.removeEventListener('touchstart', startAutoplay);
+    }
+
+    window.addEventListener('load', () => {
+      // Track page visit
+      trackVisit('letter');
+
+      if (sessionStorage.getItem('music_is_playing') === 'false') {
+        updateMusicUI(false);
+        return;
+      }
+      setTimeout(() => {
+        musicBox.audio.play().then(() => {
+          musicBox.isPlaying = true;
+          sessionStorage.setItem('music_is_playing', 'true');
+          updateMusicUI(true);
+        }).catch(err => {
+          console.log("Autoplay blocked, waiting for interaction.");
+          window.addEventListener('click', startAutoplay);
+          window.addEventListener('touchstart', startAutoplay);
+        });
+      }, 100);
+    });
+  </script>
+</body>
+
+</html>

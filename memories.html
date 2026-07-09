@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Memories 📸</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Homemade+Apple&family=Zeyada&display=swap">
+  <link rel="stylesheet" href="./style.css">
+  <script>
+    if (sessionStorage.getItem('birthday_unlocked') !== 'true') {
+      window.location.href = 'index.html';
+    }
+  </script>
+  <script src="tracker.js"></script>
+  <style>
+    p { font-family: inherit; font-size: inherit; opacity: 1; user-select: auto; color: inherit; }
+
+    body {
+      min-height: 100vh;
+      height: auto !important;
+      margin: 0;
+      background-image: url("https://www.psdgraphics.com/wp-content/uploads/2022/01/white-math-paper-texture.jpg");
+      background-size: 1000px;
+      background-position: center;
+      padding: 60px 20px 50px;
+      box-sizing: border-box;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start !important;
+    }
+
+    .top-music {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .page-heading {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .page-heading h1 {
+      font-family: 'Short Stack', cursive;
+      font-size: clamp(28px, 5vw, 50px);
+      color: #c2185b;
+      margin: 0 0 8px 0;
+    }
+
+    .page-heading .subtitle-text {
+      font-family: 'Zeyada', cursive;
+      font-size: clamp(20px, 3vw, 30px);
+      color: #777;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    /* Polaroid grid - larger on full page */
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      padding: 15px;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 52px;
+    }
+
+    .polaroid-img-wrapper {
+      position: relative !important;
+      aspect-ratio: 4 / 3 !important;
+      overflow: hidden !important;
+    }
+
+    .polaroid-img-wrapper img {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center top !important;
+      display: block !important;
+    }
+
+    .polaroid-card {
+      max-width: 380px;
+      padding: 20px 20px 48px 20px !important;
+      justify-self: center;
+    }
+
+    .polaroid-caption {
+      font-size: clamp(28px, 4vw, 36px) !important;
+      margin-top: 18px !important;
+    }
+
+    .btn-continue {
+      font-family: 'Short Stack', cursive;
+      font-size: 18px;
+      padding: 16px 48px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff6b81, #c2185b);
+      color: white;
+      box-shadow: 0 6px 20px rgba(194, 24, 91, 0.35);
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-continue:hover {
+      transform: scale(1.06) translateY(-3px);
+      box-shadow: 0 12px 28px rgba(194, 24, 91, 0.45);
+    }
+
+    @media (max-width: 600px) {
+      .photos-grid { grid-template-columns: 1fr; gap: 24px; }
+      .polaroid-card { max-width: 320px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Music Controls -->
+  <div class="top-music">
+    <button id="music-toggle" class="music-btn" aria-label="Toggle music">
+      <span class="music-icon">🎵</span>
+      <span class="music-text">Play Sound</span>
+    </button>
+    <div class="music-visualizer" id="visualizer">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+
+  <div class="page-heading">
+    <h1>Our Memories 📸</h1>
+    <p class="subtitle-text">Click a photo to view it ❤️</p>
+  </div>
+
+  <div class="photos-grid">
+    <div class="polaroid-card" data-caption="Best Friend 🤝">
+      <div class="polaroid-img-wrapper">
+        <img src="images/pr01.jpeg" alt="Memory 1" />
+      </div>
+      <div class="polaroid-caption">Best Friend 🤝</div>
+    </div>
+
+    <div class="polaroid-card" data-caption="So Beautiful ✨">
+      <div class="polaroid-img-wrapper">
+        <img src="images/2.jpeg" alt="Memory 2" />
+      </div>
+      <div class="polaroid-caption">So Beautiful ✨</div>
+    </div>
+
+    <div class="polaroid-card" data-caption="Cutest Smile ❤️">
+      <div class="polaroid-img-wrapper">
+        <img src="images/3.jpg" alt="Memory 3" />
+      </div>
+      <div class="polaroid-caption">Cutest Smile ❤️</div>
+    </div>
+
+
+  </div>
+
+  <a href="letter.html" class="btn-continue">Read My Letter 💌</a>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close" id="close-lightbox">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" alt="Enlarged photo">
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+  </div>
+
+  <script>
+    /* Polaroid Lightbox */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+
+    document.querySelectorAll('.polaroid-card').forEach(card => {
+      card.addEventListener('click', () => {
+        lightboxImg.src = card.querySelector('img').src;
+        lightboxCaption.textContent = card.dataset.caption;
+        lightbox.classList.add('active');
+      });
+    });
+
+    document.getElementById('close-lightbox').addEventListener('click', () => lightbox.classList.remove('active'));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('active'); });
+
+    /* Music Player */
+    class MusicBox {
+      constructor() {
+        this.audio = new Audio('images/ishq_bulaava_bollywood.mp3');
+        this.audio.loop = true;
+        this.isPlaying = false;
+
+        // Restore time position if exists
+        const savedTime = sessionStorage.getItem('music_current_time');
+        if (savedTime) {
+          this.audio.currentTime = parseFloat(savedTime);
+        }
+
+        // Continuously update saved time
+        this.audio.addEventListener('timeupdate', () => {
+          sessionStorage.setItem('music_current_time', this.audio.currentTime);
+        });
+      }
+      start() {
+        this.isPlaying = true;
+        sessionStorage.setItem('music_is_playing', 'true');
+        this.audio.play().catch(err => console.log("Audio play blocked: " + err));
+      }
+      stop() {
+        this.isPlaying = false;
+        sessionStorage.setItem('music_is_playing', 'false');
+        this.audio.pause();
+      }
+    }
+
+    const musicBox = new MusicBox();
+    const musicToggle = document.getElementById('music-toggle');
+    const visualizer = document.getElementById('visualizer');
+    const musicIcon = musicToggle.querySelector('.music-icon');
+    const musicText = musicToggle.querySelector('.music-text');
+
+    function updateMusicUI(playing) {
+      if (playing) {
+        musicIcon.textContent = '⏸️'; musicText.textContent = 'Pause Sound';
+        musicToggle.classList.add('playing'); visualizer.classList.add('playing');
+      } else {
+        musicIcon.textContent = '🎵'; musicText.textContent = 'Play Sound';
+        musicToggle.classList.remove('playing'); visualizer.classList.remove('playing');
+      }
+    }
+
+    musicToggle.addEventListener('click', () => {
+      if (musicBox.isPlaying) {
+        musicBox.stop();
+        updateMusicUI(false);
+      } else {
+        musicBox.start();
+        updateMusicUI(true);
+      }
+    });
+
+    function startAutoplay() {
+      if (sessionStorage.getItem('music_is_playing') !== 'false') {
+        musicBox.start();
+        updateMusicUI(true);
+      }
+      window.removeEventListener('click', startAutoplay);
+      window.removeEventListener('touchstart', startAutoplay);
+    }
+
+    window.addEventListener('load', () => {
+      // Track page visit
+      trackVisit('memories');
+
+      if (sessionStorage.getItem('music_is_playing') === 'false') {
+        updateMusicUI(false);
+        return;
+      }
+      setTimeout(() => {
+        musicBox.audio.play().then(() => {
+          musicBox.isPlaying = true;
+          sessionStorage.setItem('music_is_playing', 'true');
+          updateMusicUI(true);
+        }).catch(err => {
+          console.log("Autoplay blocked, waiting for interaction.");
+          window.addEventListener('click', startAutoplay);
+          window.addEventListener('touchstart', startAutoplay);
+        });
+      }, 100);
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login — Birthday App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Short+Stack&display=swap">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Short Stack', cursive;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a, #1e1b4b, #0f172a);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-container {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 40px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(12px);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: #ff6b81;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #94a3b8;
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      color: #cbd5e1;
+      font-size: 13px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      font-family: 'Short Stack', cursive;
+      font-size: 15px;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    input:focus {
+      border-color: #ff6b81;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 10px rgba(255, 107, 129, 0.2);
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #ff6b81, #c2185b);
+      color: white;
+      font-family: 'Short Stack', cursive;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 107, 129, 0.3);
+      transition: all 0.2s;
+      margin-top: 10px;
+    }
+
+    .btn-login:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 107, 129, 0.4);
+    }
+
+    .btn-login:active {
+      transform: translateY(0);
+    }
+
+    .error-box {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #f87171;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .footer {
+      margin-top: 24px;
+      font-size: 11px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h1>🎂 Admin Access</h1>
+    <p class="subtitle">Enter credentials to view response dashboard</p>
+
+    <div class="error-box" id="error-message"></div>
+
+    <form id="login-form">
+      <div class="form-group">
+        <label for="api-url">Backend URL</label>
+        <input type="text" id="api-url" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required placeholder="••••••••">
+      </div>
+
+      <button type="submit" class="btn-login" id="submit-btn">Login 🔓</button>
+    </form>
+
+    <div class="footer">🔒 Secure Authentication System</div>
+  </div>
+
+  <script>
+    // Set default URL based on current host (local vs production)
+    window.addEventListener('DOMContentLoaded', () => {
+      const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+      const defaultUrl = isLocal ? 'http://localhost:3000' : 'https://impressing-crush-production.up.railway.app';
+      
+      document.getElementById('api-url').value = localStorage.getItem('birthday_api_url') || defaultUrl;
+    });
+
+    const form = document.getElementById('login-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const errorBox = document.getElementById('error-message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const apiUrl = document.getElementById('api-url').value.trim().replace(/\/$/, '');
+      const password = document.getElementById('password').value.trim();
+
+      errorBox.style.display = 'none';
+      submitBtn.textContent = 'Verifying... ⏳';
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch(`${apiUrl}/api/responses?secret=${encodeURIComponent(password)}`);
+        
+        if (response.status === 401) {
+          showError('❌ Invalid Password! Please try again.');
+          return;
+        }
+
+        if (!response.ok) {
+          showError('❌ Server error or invalid backend address.');
+          return;
+        }
+
+        // Save credentials to sessionStorage (temporary for the session)
+        sessionStorage.setItem('admin_secret', password);
+        sessionStorage.setItem('admin_api_url', apiUrl);
+        localStorage.setItem('birthday_api_url', apiUrl); // Keep URL saved for convenience
+
+        // Redirect to dashboard
+        window.location.href = 'admin-dashboard.html';
+
+      } catch (err) {
+        showError('❌ Failed to connect to server. Make sure your server is running.');
+      } finally {
+        submitBtn.textContent = 'Login 🔓';
+        submitBtn.disabled = false;
+      }
+    });
+
+    function showError(msg) {
+      errorBox.textContent = msg;
+      errorBox.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

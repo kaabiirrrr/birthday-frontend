@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Question For You 💌</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Short+Stack&family=Homemade+Apple&family=Zeyada&display=swap">
+  <link rel="stylesheet" href="./style.css">
+  <script>
+    if (sessionStorage.getItem('birthday_unlocked') !== 'true') {
+      window.location.href = 'index.html';
+    }
+  </script>
+  <script src="tracker.js"></script>
+  <style>
+    /* Reset global p override for this page */
+    p {
+      font-family: inherit;
+      font-size: inherit;
+      opacity: 1;
+      user-select: auto;
+      color: inherit;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-image: url("https://www.psdgraphics.com/wp-content/uploads/2022/01/white-math-paper-texture.jpg");
+      background-size: 1000px;
+      background-position: center;
+      padding: 40px 20px;
+      box-sizing: border-box;
+      overflow-x: hidden;
+    }
+
+    .top-music {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+    }
+
+    .q-content {
+      text-align: center;
+      max-width: 700px;
+      width: 100%;
+    }
+
+    .q-heart-emoji {
+      font-size: 56px;
+      display: block;
+      margin-bottom: 20px;
+      animation: heartPulseQ 1.5s infinite alternate ease-in-out;
+    }
+
+    @keyframes heartPulseQ {
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(1.18);
+      }
+    }
+
+    .q-title {
+      font-family: 'Short Stack', cursive;
+      font-size: clamp(26px, 5vw, 52px);
+      color: #c2185b;
+      margin: 0 0 20px 0;
+    }
+
+    .q-text {
+      font-family: 'Homemade Apple', cursive;
+      font-size: clamp(18px, 3.5vw, 30px);
+      color: rgb(22, 28, 70);
+      margin: 0 0 44px 0;
+      line-height: 1.8;
+    }
+
+    .q-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      min-height: 100px;
+      position: relative;
+      flex-wrap: wrap;
+    }
+
+    .btn-yes {
+      font-family: 'Short Stack', cursive;
+      font-size: 20px;
+      padding: 16px 48px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #4cd137, #44bd32);
+      color: white;
+      box-shadow: 0 6px 20px rgba(68, 189, 50, 0.4);
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+      z-index: 5;
+    }
+
+    .btn-yes:hover {
+      transform: scale(1.08);
+      box-shadow: 0 10px 28px rgba(68, 189, 50, 0.5);
+    }
+
+    .btn-no {
+      font-family: 'Short Stack', cursive;
+      font-size: 20px;
+      padding: 16px 48px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff4757, #ff6b81);
+      color: white;
+      box-shadow: 0 6px 20px rgba(255, 71, 87, 0.3);
+      transition: all 0.2s ease;
+      z-index: 4;
+    }
+
+    .success-msg {
+      display: none;
+      text-align: center;
+      animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.82);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .success-heart-big {
+      font-size: 70px;
+      display: block;
+      margin-bottom: 16px;
+      animation: heartPulseQ 0.7s infinite alternate ease-in-out;
+    }
+
+    .success-title {
+      font-family: 'Short Stack', cursive;
+      font-size: clamp(28px, 5vw, 44px);
+      color: #c2185b;
+      margin: 0 0 12px 0;
+    }
+
+    .success-sub {
+      font-family: 'Homemade Apple', cursive;
+      font-size: clamp(16px, 3vw, 22px);
+      color: #2c3e50;
+      margin: 0 0 36px 0;
+      line-height: 1.6;
+    }
+
+    .btn-continue {
+      font-family: 'Short Stack', cursive;
+      font-size: 18px;
+      padding: 16px 44px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff6b81, #c2185b);
+      color: white;
+      box-shadow: 0 6px 20px rgba(194, 24, 91, 0.35);
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-continue:hover {
+      transform: scale(1.06) translateY(-3px);
+      box-shadow: 0 12px 28px rgba(194, 24, 91, 0.45);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Music Controls -->
+  <div class="top-music">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button id="music-toggle" class="music-btn" aria-label="Toggle music">
+        <span class="music-icon">🎵</span>
+        <span class="music-text">Play Sound</span>
+      </button>
+      <div class="music-visualizer" id="visualizer">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-content">
+    <!-- Question Section -->
+    <div id="question-section">
+      <span class="q-heart-emoji">🥹</span>
+      <h1 class="q-title">I have a question... 👉👈</h1>
+      <p class="q-text">Will you be my Friend Forever? 🤝❤️</p>
+      <div class="q-buttons">
+        <button id="yes-btn" class="btn-yes">Yes! 😍</button>
+        <button id="no-btn" class="btn-no">No 😢</button>
+      </div>
+    </div>
+
+    <!-- Success Section -->
+    <div id="success-section" class="success-msg">
+      <span class="success-heart-big">❤️</span>
+      <h2 class="success-title">FOREVER! 🤝❤️</h2>
+      <p class="success-sub">I knew you'd say Yes! You are the absolute best!<br>I have something special for you... ✨
+      </p>
+      <a href="wishes.html" class="btn-continue">See My Wishes For You ✨</a>
+    </div>
+  </div>
+
+  <script>
+    /* ---- Best Friend Game ---- */
+    const noPrompts = [
+      "No 😢", "Are you sure? 🥺", "Think again! 💔", "Please? 👉👈",
+      "I'll buy you pizza! 🍕", "I'll be the best bestie! 🥇", "You can't say no! 😉",
+      "Still no? 😭", "Last chance... 🥺", "Just click Yes! 🤝"
+    ];
+    let noCount = 0;
+    const yesBtn = document.getElementById('yes-btn');
+    const noBtn = document.getElementById('no-btn');
+    const questionSection = document.getElementById('question-section');
+    const successSection = document.getElementById('success-section');
+
+    // Track visit on load
+    window.addEventListener('load', () => trackVisit('question'));
+
+    noBtn.addEventListener('click', () => {
+      noCount++;
+      noBtn.textContent = noPrompts[Math.min(noCount, noPrompts.length - 1)];
+      yesBtn.style.transform = `scale(${1 + noCount * 0.4})`;
+      const r = 45;
+      noBtn.style.transform = `translate(${(Math.random() - 0.5) * r}px, ${(Math.random() - 0.5) * r}px)`;
+      
+      // Track clicking 'No'
+      trackVisit('question', `Clicked No ${noCount} times 😢`, 'no');
+      
+      if (noCount >= 9) noBtn.style.display = 'none';
+    });
+
+    yesBtn.addEventListener('click', () => {
+      questionSection.style.display = 'none';
+      successSection.style.display = 'block';
+      
+      // Track clicking 'Yes'
+      trackVisit('question', 'Yes! 😍', 'yes');
+      
+      if (musicBox) {
+        musicBox.playNote(783.99, 0.4);
+        setTimeout(() => musicBox.playNote(987.77, 0.4), 120);
+        setTimeout(() => musicBox.playNote(1046.50, 0.6), 240);
+      }
+    });
+
+    /* Music Player */
+    class MusicBox {
+      constructor() {
+        this.audio = new Audio('images/ishq_bulaava_bollywood.mp3');
+        this.audio.loop = true;
+        this.isPlaying = false;
+
+        // Restore time position if exists
+        const savedTime = sessionStorage.getItem('music_current_time');
+        if (savedTime) {
+          this.audio.currentTime = parseFloat(savedTime);
+        }
+
+        // Continuously update saved time
+        this.audio.addEventListener('timeupdate', () => {
+          sessionStorage.setItem('music_current_time', this.audio.currentTime);
+        });
+      }
+      playNote(freq, dur) {
+        // Dummy method so custom success chimes don't break
+      }
+      start() {
+        this.isPlaying = true;
+        sessionStorage.setItem('music_is_playing', 'true');
+        this.audio.play().catch(err => console.log("Audio play blocked: " + err));
+      }
+      stop() {
+        this.isPlaying = false;
+        sessionStorage.setItem('music_is_playing', 'false');
+        this.audio.pause();
+      }
+    }
+
+    const musicBox = new MusicBox();
+    const musicToggle = document.getElementById('music-toggle');
+    const visualizer = document.getElementById('visualizer');
+    const musicIcon = musicToggle.querySelector('.music-icon');
+    const musicText = musicToggle.querySelector('.music-text');
+
+    function updateMusicUI(playing) {
+      if (playing) {
+        musicIcon.textContent = '⏸️'; musicText.textContent = 'Pause Sound';
+        musicToggle.classList.add('playing'); visualizer.classList.add('playing');
+      } else {
+        musicIcon.textContent = '🎵'; musicText.textContent = 'Play Sound';
+        musicToggle.classList.remove('playing'); visualizer.classList.remove('playing');
+      }
+    }
+
+    musicToggle.addEventListener('click', () => {
+      if (musicBox.isPlaying) {
+        musicBox.stop();
+        updateMusicUI(false);
+      } else {
+        musicBox.start();
+        updateMusicUI(true);
+      }
+    });
+
+    function startAutoplay() {
+      if (sessionStorage.getItem('music_is_playing') !== 'false') {
+        musicBox.start();
+        updateMusicUI(true);
+      }
+      window.removeEventListener('click', startAutoplay);
+      window.removeEventListener('touchstart', startAutoplay);
+    }
+
+    window.addEventListener('load', () => {
+      if (sessionStorage.getItem('music_is_playing') === 'false') {
+        updateMusicUI(false);
+        return;
+      }
+      setTimeout(() => {
+        musicBox.audio.play().then(() => {
+          musicBox.isPlaying = true;
+          sessionStorage.setItem('music_is_playing', 'true');
+          updateMusicUI(true);
+        }).catch(err => {
+          console.log("Autoplay blocked, waiting for interaction.");
+          window.addEventListener('click', startAutoplay);
+          window.addEventListener('touchstart', startAutoplay);
+        });
+      }, 100);
+    });
+  </script>
+</body>
+
+</html>
