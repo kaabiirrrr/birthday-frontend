@@ -30,7 +30,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      overflow-x: hidden; /* Prevent horizontal scrolling */
+      overflow-x: hidden;
+      /* Prevent horizontal scrolling */
     }
 
     .login-container {
@@ -122,7 +123,8 @@
       margin: 0 auto;
     }
 
-    .login-input:focus, .login-textarea:focus {
+    .login-input:focus,
+    .login-textarea:focus {
       border-color: #c2185b;
       box-shadow: 0 6px 15px rgba(194, 24, 91, 0.15);
       background-color: #ffffff;
@@ -229,33 +231,41 @@
       body {
         padding: 20px 10px;
       }
+
       .login-container {
         padding: 0 5px;
       }
+
       .login-card {
         padding: 30px 15px;
       }
+
       .login-heading {
         font-size: 24px;
         line-height: 1.3;
       }
+
       .login-sub {
         font-size: 18px;
         margin-bottom: 20px !important;
       }
+
       .login-input {
         font-size: 15px;
         padding: 10px 15px;
       }
+
       .login-textarea {
         font-size: 15px;
         padding: 12px;
         height: 120px;
       }
+
       .btn-unlock {
         font-size: 16px;
         padding: 10px 28px;
       }
+
       .btn-hint {
         font-size: 14px;
         padding: 6px 20px;
@@ -331,10 +341,11 @@
         </div>
 
         <!-- Custom Relationship Input (Initially Hidden) -->
-        <div id="custom-relationship-container" style="display: none; max-width: 320px; margin: 0 auto; text-align: center;">
+        <div id="custom-relationship-container"
+          style="display: none; max-width: 320px; margin: 0 auto; text-align: center;">
           <div class="input-group" style="margin-bottom: 10px;">
-            <input type="text" id="custom-relationship-input" class="login-input" 
-              placeholder="Sanga mag kon aahe? ✍️" required autocomplete="off" oninput="updateCustomCharCount()"
+            <input type="text" id="custom-relationship-input" class="login-input" placeholder="Sanga mag kon aahe? ✍️"
+              required autocomplete="off" oninput="updateCustomCharCount()"
               style="width: 100%; max-width: 320px; border-radius: 25px; padding: 12px 20px;">
             <p id="custom-char-count"
               style="font-family:'Short Stack',cursive; font-size:13px; color:#aaa; margin: 6px 5px 0 0; text-align:right; transition: color 0.3s;">
@@ -342,11 +353,11 @@
           </div>
           <p id="custom-relationship-error" class="error-message" style="margin-top: 6px; min-height: 20px;"></p>
           <div style="display: flex; gap: 15px; justify-content: center; margin-top: 15px;">
-            <button type="button" class="btn-unlock" 
-              style="background: linear-gradient(135deg, #7f8c8d, #95a5a6); box-shadow: 0 6px 20px rgba(127, 140, 141, 0.2); padding: 10px 25px; font-size: 16px;" 
+            <button type="button" class="btn-unlock"
+              style="background: linear-gradient(135deg, #7f8c8d, #95a5a6); box-shadow: 0 6px 20px rgba(127, 140, 141, 0.2); padding: 10px 25px; font-size: 16px;"
               onclick="hideCustomRelationshipInput()">Back ⬅️</button>
-            <button type="button" class="btn-unlock" 
-              style="background: linear-gradient(135deg, #ff6b81, #c2185b); box-shadow: 0 6px 20px rgba(194, 24, 91, 0.25); padding: 10px 25px; font-size: 16px;" 
+            <button type="button" class="btn-unlock"
+              style="background: linear-gradient(135deg, #ff6b81, #c2185b); box-shadow: 0 6px 20px rgba(194, 24, 91, 0.25); padding: 10px 25px; font-size: 16px;"
               onclick="submitCustomRelationship()">Submit ➡️</button>
           </div>
         </div>
@@ -378,7 +389,7 @@
       const btn = event.target;
       if (hintClickCount < 4) {
         hintClickCount++;
-        
+
         // Update prompt text
         if (hintPrompts[hintClickCount]) {
           btn.textContent = hintPrompts[hintClickCount];
@@ -391,7 +402,7 @@
         const randomY = (Math.random() - 0.5) * rangeY * 2;
 
         btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
-        
+
         // Shake card for playful feedback
         const loginCard = document.getElementById('login-card');
         loginCard.classList.add('shake');
@@ -523,7 +534,7 @@
       } else {
         // Clear input and show error with shake effect
         passwordInput.value = '';
-        errorMsg.textContent = 'Mazhi Birthdate Nahi mhiti tula ?? Vait vattla mala 😞🥹';
+        errorMsg.textContent = 'Mazhi Birthdate Nahi mhiti tula ?? Vait vattla 😞🥹';
         errorMsg.classList.add('visible');
 
         loginCard.classList.add('shake');
@@ -533,8 +544,10 @@
       }
     }
   </script>
-  <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); font-family: 'Short Stack', cursive; font-size: 13px; z-index: 10; width: max-content;">
-    <a href="admin.html" style="color: #c2185b; text-decoration: none; opacity: 0.6; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Admin Login 🔒</a>
+  <div
+    style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); font-family: 'Short Stack', cursive; font-size: 13px; z-index: 10; width: max-content;">
+    <a href="admin.html" style="color: #c2185b; text-decoration: none; opacity: 0.6; transition: opacity 0.2s;"
+      onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Admin Login 🔒</a>
   </div>
 </body>
 
