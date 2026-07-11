@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,6 +51,7 @@
         opacity: 0;
         transform: scale(0.92) translateY(20px);
       }
+
       to {
         opacity: 1;
         transform: scale(1) translateY(0);
@@ -158,9 +160,26 @@
     }
 
     @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      10%, 30%, 50%, 70%, 90% { transform: translateX(-6px); }
-      20%, 40%, 60%, 80% { transform: translateX(6px); }
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      10%,
+      30%,
+      50%,
+      70%,
+      90% {
+        transform: translateX(-6px);
+      }
+
+      20%,
+      40%,
+      60%,
+      80% {
+        transform: translateX(6px);
+      }
     }
 
     /* ---- Floating Chocos & Hearts Canvas ---- */
@@ -178,14 +197,27 @@
       animation: floatUp linear infinite;
       opacity: 0;
       user-select: none;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
     }
 
     @keyframes floatUp {
-      0%   { transform: translateY(110vh) rotate(-15deg); opacity: 0; }
-      10%  { opacity: 1; }
-      90%  { opacity: 0.9; }
-      100% { transform: translateY(-150px) rotate(45deg); opacity: 0; }
+      0% {
+        transform: translateY(110vh) rotate(-15deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 0.9;
+      }
+
+      100% {
+        transform: translateY(-150px) rotate(45deg);
+        opacity: 0;
+      }
     }
 
     /* Pulse animation for Rosella Gift */
@@ -194,7 +226,7 @@
       display: block;
       margin: 0 auto 20px;
       animation: heroFloat 2.4s infinite alternate ease-in-out, pulseGift 2.4s infinite alternate ease-in-out;
-      filter: drop-shadow(0 10px 24px rgba(0,0,0,0.25));
+      filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.25));
       cursor: pointer;
       transition: transform 0.2s;
     }
@@ -204,13 +236,23 @@
     }
 
     @keyframes heroFloat {
-      from { transform: translateY(0) rotate(-4deg); }
-      to   { transform: translateY(-14px) rotate(4deg); }
+      from {
+        transform: translateY(0) rotate(-4deg);
+      }
+
+      to {
+        transform: translateY(-14px) rotate(4deg);
+      }
     }
 
     @keyframes pulseGift {
-      from { filter: drop-shadow(0 10px 24px rgba(255, 107, 129, 0.2)); }
-      to   { filter: drop-shadow(0 12px 30px rgba(255, 107, 129, 0.45)); }
+      from {
+        filter: drop-shadow(0 10px 24px rgba(255, 107, 129, 0.2));
+      }
+
+      to {
+        filter: drop-shadow(0 12px 30px rgba(255, 107, 129, 0.45));
+      }
     }
 
     /* Responsive Media Queries */
@@ -218,25 +260,31 @@
       body {
         padding: 20px 10px;
       }
+
       .login-container {
         padding: 0 5px;
       }
+
       .login-card {
         padding: 30px 15px;
       }
+
       .login-heading {
         font-size: 24px;
         line-height: 1.3;
       }
+
       .login-sub {
         font-size: 18px;
         margin-bottom: 20px !important;
       }
+
       .login-textarea {
         font-size: 15px;
         padding: 12px;
         height: 120px;
       }
+
       .btn-unlock {
         font-size: 16px;
         padding: 10px 28px;
@@ -244,13 +292,15 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- Floating Canvas -->
   <div class="choco-field" id="choco-field"></div>
 
   <!-- Music controls shared session state -->
-  <div class="top-music" style="position: fixed; top: 20px; left: 20px; z-index: 100; display: flex; align-items: center; gap: 10px;">
+  <div class="top-music"
+    style="position: fixed; top: 20px; left: 20px; z-index: 100; display: flex; align-items: center; gap: 10px;">
     <button id="music-toggle" class="music-btn" aria-label="Toggle music">
       <span class="music-icon">🎵</span>
       <span class="music-text">Play Sound</span>
@@ -268,15 +318,16 @@
       <!-- State 1: Form -->
       <div id="gift-form-state">
         <h1 class="login-heading">Send a Return Gift 🎁</h1>
-        <p class="login-sub">Write a sweet note about the surprise & me... (min 100 characters) 👉👈</p>
-        
+        <p class="login-sub">Kasa Vattla Gift (min 500 characters) 👉👈</p>
+
         <form id="gift-form" onsubmit="submitReturnGift(event)">
           <div class="input-group" style="max-width: 520px; margin: 0 auto 10px auto; text-align: left;">
-            <textarea id="gift-input" class="login-textarea" placeholder="Write your feelings here... (min 100 characters) ✍️❤️" required
-              autocomplete="off" oninput="updateCharCount()"></textarea>
+            <textarea id="gift-input" class="login-textarea"
+              placeholder="Write your feelings here... (min 500 characters) ✍️❤️" required autocomplete="off"
+              oninput="updateCharCount()"></textarea>
             <p id="char-count"
               style="font-family:'Short Stack',cursive; font-size:13px; color:#aaa; margin: 6px 5px 0 0; text-align:right; transition: color 0.3s;">
-              0 / 100 characters minimum</p>
+              0 / 500 characters minimum</p>
           </div>
           <p id="gift-error" class="error-message" style="margin-top: 6px;"></p>
           <button type="submit" class="btn-unlock" style="margin-top: 15px;">Send Gift ❤️</button>
@@ -286,14 +337,17 @@
       <!-- State 2: Success (Rosella Gift Reveal) -->
       <div id="gift-success-state" style="display: none;">
         <h1 class="login-heading">Gift Submitted! 🎉🎁</h1>
-        <p class="login-sub" style="margin-bottom: 20px !important;">Here is your return gift... Click it! 🍫</p>
-        
+        <p class="login-sub" style="margin-bottom: 20px !important;">Return Gift ghya Prajakta Madam 🌼</p>
+
         <div style="position: relative; height: 260px;">
-          <img src="images/Screenshot_2026-07-09_at_3.48.16_PM-removebg-preview.png" alt="Rosella Chocolate" class="hero-choco" onclick="popMoreItems()">
+          <img src="images/Screenshot_2026-07-09_at_3.48.16_PM-removebg-preview.png" alt="Rosella Chocolate"
+            class="hero-choco" onclick="popMoreItems()">
         </div>
 
-        <p class="login-sub" style="font-size: 20px; color: #c2185b; margin-top: 10px; margin-bottom: 25px !important; line-height: 1.5;">
-          "A Rosella Chocolate for you too! ❤️ Thank you so much for the beautiful memories and sweet words. Hope this put a big smile on your face! 🎂✨"
+        <p class="login-sub"
+          style="font-size: 20px; color: #c2185b; margin-top: 10px; margin-bottom: 25px !important; line-height: 1.5;">
+          "A Rosella Chocolate for you too! ❤️ Thank you so much for the beautiful memories and sweet words. Hope this
+          put a big smile on your face! 🎂✨"
         </p>
 
         <a href="drag.html" class="btn-unlock" style="text-decoration: none; display: inline-block;">Back to Home 🏠</a>
@@ -309,8 +363,8 @@
       const input = document.getElementById('gift-input');
       const counter = document.getElementById('char-count');
       const len = input.value.trim().length;
-      counter.textContent = `${len} / 100 characters minimum`;
-      counter.style.color = len >= 100 ? '#4cd137' : (len >= 50 ? '#e67e22' : '#aaa');
+      counter.textContent = `${len} / 500 characters minimum`;
+      counter.style.color = len >= 500 ? '#4cd137' : (len >= 250 ? '#e67e22' : '#aaa');
     }
 
     function submitReturnGift(e) {
@@ -320,7 +374,7 @@
       const text = input.value.trim();
 
       if (text.length < 100) {
-        errorMsg.textContent = `Aww, please write at least 100 characters! 🥺`;
+        errorMsg.textContent = `Sngit la n Kanjoosi nahi, chal lihi ajun thoda 🥺`;
         errorMsg.classList.add('visible');
         input.classList.add('shake');
         setTimeout(() => input.classList.remove('shake'), 500);
@@ -328,7 +382,7 @@
       }
 
       errorMsg.classList.remove('visible');
-      
+
       // Save response to DB
       sendReturnGift(text);
 
@@ -346,7 +400,7 @@
         'images/Screenshot_2026-07-09_at_3.48.16_PM-removebg-preview.png',
         'images/heart.webp'
       ];
-      
+
       const total = 30;
       for (let i = 0; i < total; i++) {
         createFloatingItem(items[Math.floor(Math.random() * items.length)]);
@@ -358,11 +412,11 @@
       const el = document.createElement('img');
       el.className = 'floating-gift-item';
       el.src = src;
-      
-      const left  = Math.random() * 100;
-      const size  = 30 + Math.random() * 45; // 30px - 75px
+
+      const left = Math.random() * 100;
+      const size = 30 + Math.random() * 45; // 30px - 75px
       const delay = Math.random() * 5;
-      const dur   = 4 + Math.random() * 5;
+      const dur = 4 + Math.random() * 5;
 
       el.style.cssText = `
         left: ${left}vw;
@@ -371,7 +425,7 @@
         animation-duration: ${dur}s;
       `;
       field.appendChild(el);
-      
+
       // Remove element after animation completes to avoid memory leak
       setTimeout(() => el.remove(), (delay + dur) * 1000);
     }
@@ -384,7 +438,7 @@
       for (let i = 0; i < 8; i++) {
         createFloatingItem(items[Math.floor(Math.random() * items.length)]);
       }
-      
+
       // Play a cute audio sound
       if (musicBox) {
         musicBox.playNote(523.25, 0.15); // C5
@@ -425,16 +479,16 @@
           const ctx = new (window.AudioContext || window.webkitAudioContext)();
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
-          
+
           osc.type = 'sine';
           osc.frequency.value = frequency;
-          
+
           gain.gain.setValueAtTime(0.2, ctx.currentTime);
           gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + duration);
-          
+
           osc.connect(gain);
           gain.connect(ctx.destination);
-          
+
           osc.start();
           osc.stop(ctx.currentTime + duration);
         } catch (e) {
@@ -451,14 +505,14 @@
 
     function updateMusicUI() {
       if (musicBox.isPlaying) {
-        musicIcon.textContent = '⏸️'; 
+        musicIcon.textContent = '⏸️';
         musicText.textContent = 'Pause Sound';
-        musicToggle.classList.add('playing'); 
+        musicToggle.classList.add('playing');
         visualizer.classList.add('playing');
       } else {
-        musicIcon.textContent = '🎵'; 
+        musicIcon.textContent = '🎵';
         musicText.textContent = 'Play Sound';
-        musicToggle.classList.remove('playing'); 
+        musicToggle.classList.remove('playing');
         visualizer.classList.remove('playing');
       }
     }
@@ -479,4 +533,5 @@
     }
   </script>
 </body>
+
 </html>
