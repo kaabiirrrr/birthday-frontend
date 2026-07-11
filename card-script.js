@@ -113,14 +113,14 @@ function animateLetter() {
 tabBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     const targetTab = btn.getAttribute('data-tab');
-    
+
     tabBtns.forEach(b => b.classList.remove('active'));
     tabPanes.forEach(p => p.classList.remove('active'));
-    
+
     btn.classList.add('active');
     const targetPane = document.getElementById(targetTab);
     targetPane.classList.add('active');
-    
+
     if (targetTab === 'tab-letter') {
       animateLetter();
     }
@@ -139,7 +139,7 @@ polaroids.forEach(card => {
   card.addEventListener('click', () => {
     const img = card.querySelector('img');
     const caption = card.querySelector('.polaroid-caption').textContent;
-    
+
     lightboxImg.src = img.src;
     lightboxCaption.textContent = caption;
     lightbox.classList.add('active');
@@ -190,21 +190,21 @@ const successContent = document.getElementById('success-content');
 if (noBtn && yesBtn) {
   noBtn.addEventListener('click', () => {
     noCount++;
-    
+
     // 1. Change text of NO button
     const nextPrompt = noPrompts[Math.min(noCount, noPrompts.length - 1)];
     noBtn.textContent = nextPrompt;
-    
+
     // 2. Make YES button grow bigger
     const scale = 1 + noCount * 0.4; // Grow by 40% each click
     yesBtn.style.transform = `scale(${scale})`;
-    
+
     // 3. Move NO button slightly to be playful
     const offsetRange = 35;
     const randomX = (Math.random() - 0.5) * offsetRange;
     const randomY = (Math.random() - 0.5) * offsetRange;
     noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
-    
+
     // If clicked too many times, hide the NO button
     if (noCount >= 9) {
       noBtn.style.display = 'none';
@@ -214,7 +214,7 @@ if (noBtn && yesBtn) {
   yesBtn.addEventListener('click', () => {
     questionContent.style.display = 'none';
     successContent.style.display = 'block';
-    
+
     // Play celebratory high notes
     if (musicBox) {
       musicBox.playNote(783.99, 0.4); // G5

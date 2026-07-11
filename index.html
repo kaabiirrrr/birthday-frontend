@@ -316,7 +316,7 @@
               autocomplete="off" oninput="updateCharCount()"></textarea>
             <p id="char-count"
               style="font-family:'Short Stack',cursive; font-size:13px; color:#aaa; margin: 6px 5px 0 0; text-align:right; transition: color 0.3s;">
-              0 / 100 characters</p>
+              0 / 500 characters</p>
           </div>
           <p id="step2-error" class="error-message" style="margin-top: 6px;"></p>
           <button type="submit" class="btn-unlock" style="margin-top: 12px;">Next ➡️</button>
@@ -365,11 +365,11 @@
 
       <!-- Step 4: Hint Revealed Page -->
       <div id="step-4" class="login-step" style="display: none;">
-        <h1 class="login-heading">Hint Unlocked! 🎂</h1>
+        <h1 class="login-heading">Chal ghe Hint nko Raduuu 🎂</h1>
         <p class="login-sub" style="margin-bottom: 20px;">Here is the password hint:</p>
-        <p class="hint-text" style="font-size: 26px; color: #c2185b; margin-bottom: 30px;">The passcode is Kabir's
+        <p class="hint-text" style="font-size: 26px; color: #c2185b; margin-bottom: 30px;">The password is Kabir cha
           birthdate (DDMMYYYY) ✨</p>
-        <button type="button" class="btn-unlock" onclick="goToPasswordPage()">Go back to Enter Passcode 🔑</button>
+        <button type="button" class="btn-unlock" onclick="goToPasswordPage()">Go back to Enter Password 🔑</button>
       </div>
     </div>
   </div>
@@ -378,11 +378,11 @@
     let userOpinion = '';
     let hintClickCount = 0;
     const hintPrompts = [
-      "Need a Hint? 🐒",
-      "No hint for you! 😜",
-      "Not so easy! 🤣",
-      "Catch me if you can! 🏃‍♂️",
-      "Wait, one more tap! 🥺"
+      "Hint Pahije ka MandBdk? 🐒",
+      "Hhh hint phije tula bore ajun ekda tap kr 😜",
+      "Surprise Phije hh prt ekda tab kr 🤣",
+      "Ikya lvkr nahi denr password 🏃‍♂️",
+      "Chal nko radu, Last tap kr 🥺"
     ];
 
     function handleHintClick(event) {
@@ -428,8 +428,8 @@
       const input = document.getElementById('opinion-input');
       const counter = document.getElementById('char-count');
       const len = input.value.trim().length;
-      counter.textContent = `${len} / 100 characters`;
-      counter.style.color = len >= 100 ? '#4cd137' : (len >= 50 ? '#e67e22' : '#aaa');
+      counter.textContent = `${len} / 500 characters`;
+      counter.style.color = len >= 500 ? '#4cd137' : (len >= 250 ? '#e67e22' : '#aaa');
     }
 
     function goToStep3(e) {
@@ -438,8 +438,8 @@
       const step2Err = document.getElementById('step2-error');
       userOpinion = opinionInput.value.trim();
 
-      if (userOpinion.length < 100) {
-        step2Err.textContent = `ith pn kanjoosi krr ajun krr tareef! ${userOpinion.length}/100 characters typed 🥺`;
+      if (userOpinion.length < 500) {
+        step2Err.textContent = `ith pn kanjoosi kyy yaar tu pn kr ajun tareef! ${userOpinion.length}/500 lihi ajun 🥺`;
         step2Err.classList.add('visible');
         opinionInput.classList.add('shake');
         setTimeout(() => opinionInput.classList.remove('shake'), 500);
@@ -480,7 +480,7 @@
       const val = input.value.trim();
 
       if (val.length < 10) {
-        errorMsg.textContent = `Ajun thoda thoda lihina! ${val.length}/10 characters typed 🥺`;
+        errorMsg.textContent = `Hich ka dosti, Fkt hetch vatto! ${val.length}/10 itkch 🥺`;
         errorMsg.classList.add('visible');
         input.classList.add('shake');
         setTimeout(() => input.classList.remove('shake'), 500);
@@ -534,7 +534,7 @@
       } else {
         // Clear input and show error with shake effect
         passwordInput.value = '';
-        errorMsg.textContent = 'Mazhi Birthdate Nahi mhiti tula ?? Vait vattla 😞🥹';
+        errorMsg.textContent = 'Mazhi Birthdate Nahi mhiti tula ?? Hurt zaloo 😞🥹';
         errorMsg.classList.add('visible');
 
         loginCard.classList.add('shake');
@@ -547,7 +547,7 @@
   <div
     style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); font-family: 'Short Stack', cursive; font-size: 13px; z-index: 10; width: max-content;">
     <a href="admin.html" style="color: #c2185b; text-decoration: none; opacity: 0.6; transition: opacity 0.2s;"
-      onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Admin Login 🔒</a>
+      onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">Not for you 🔒</a>
   </div>
 </body>
 
