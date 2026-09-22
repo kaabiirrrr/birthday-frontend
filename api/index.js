@@ -1,13 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const path = require('path');
-require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(cors({
   origin: '*',
   methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
@@ -15,16 +11,25 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Serve static frontend files if hosted together
-app.use(express.static(path.join(__dirname)));
+// Serverless MongoDB connection caching
+let isConnected = false;
+async function connectDB() {
+  if (isConnected && mongoose.connection.readyState === 1) return;
+  const mongoUri = process.env.MONGODB_URI || 'mongodb+srv://kabirmore8904_db_user:kabir8904@birthdaycluster0.f0ykhb8.mongodb.net/birthdayApp?retryWrites=true&w=majority&appName=BirthdayCluster0';
+  await mongoose.connect(mongoUri, { serverSelectionTimeoutMS: 5000 });
+  isConnected = true;
+}
 
-// MongoDB Connection
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://kabirmore8904_db_user:kabir8904@birthdaycluster0.f0ykhb8.mongodb.net/birthdayApp?retryWrites=true&w=majority&appName=BirthdayCluster0';
-mongoose.connect(MONGODB_URI, {
-  serverSelectionTimeoutMS: 5000
-})
-  .then(() => console.log('✅ Connected to MongoDB'))
-  .catch(err => console.error('❌ MongoDB connection error:', err));
+// Middleware to ensure DB connection for API requests
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error('MongoDB connection error in serverless:', err);
+    res.status(500).json({ error: 'Database connection failed: ' + err.message });
+  }
+});
 
 // Schema & Model
 const responseSchema = new mongoose.Schema({
@@ -41,24 +46,16 @@ const responseSchema = new mongoose.Schema({
 
 const Response = mongoose.models.Response || mongoose.model('Response', responseSchema);
 
-// ─── Routes ───────────────────────────────────────────────────────────────────
-
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', message: '🎂 Birthday API is running!' });
+app.get('/api', (req, res) => {
+  res.json({ status: 'ok', message: '🎂 Birthday API running on Vercel!' });
 });
 
-// POST /api/response — save/update her answer & visits
 app.post('/api/response', async (req, res) => {
   try {
     const { sessionId, answer, answerRaw, pageName, opinion, isBestFriend, returnGift } = req.body;
-
-    if (!sessionId) {
-      return res.status(400).json({ error: 'sessionId is required' });
-    }
+    if (!sessionId) return res.status(400).json({ error: 'sessionId is required' });
 
     let response = await Response.findOne({ sessionId });
-
     if (!response) {
       response = new Response({
         sessionId,
@@ -71,7 +68,6 @@ app.post('/api/response', async (req, res) => {
       response.answer = answer;
       response.answerRaw = answerRaw;
     }
-
     if (opinion) response.opinion = opinion;
     if (isBestFriend) response.isBestFriend = isBestFriend;
     if (returnGift) response.returnGift = returnGift;
@@ -81,10 +77,7 @@ app.post('/api/response', async (req, res) => {
     }
 
     response.timestamp = new Date();
-
     await response.save();
-    console.log(`💌 Session ${sessionId} | Answer: ${response.answer} | Opinion: "${response.opinion}" | BestFriend: ${response.isBestFriend} | ReturnGift: "${response.returnGift}"`);
-
     res.status(200).json({ success: true, message: 'Response saved!' });
   } catch (err) {
     console.error('Error saving response:', err);
@@ -92,32 +85,23 @@ app.post('/api/response', async (req, res) => {
   }
 });
 
-// GET /api/responses — view all responses (protected by secret key)
 app.get('/api/responses', async (req, res) => {
   const secret = req.headers['x-admin-secret'] || req.query.secret;
   const adminSecret = process.env.ADMIN_SECRET || 'kabir_admin_2026';
-
-  if (secret !== adminSecret) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
+  if (secret !== adminSecret) return res.status(401).json({ error: 'Unauthorized' });
 
   try {
     const responses = await Response.find().sort({ timestamp: -1 });
     res.json({ total: responses.length, responses });
   } catch (err) {
-    console.error('Error fetching responses:', err);
     res.status(500).json({ error: 'Failed to fetch responses' });
   }
 });
 
-// DELETE /api/responses — clear all (protected)
 app.delete('/api/responses', async (req, res) => {
   const secret = req.headers['x-admin-secret'] || req.query.secret;
   const adminSecret = process.env.ADMIN_SECRET || 'kabir_admin_2026';
-
-  if (secret !== adminSecret) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
+  if (secret !== adminSecret) return res.status(401).json({ error: 'Unauthorized' });
 
   try {
     await Response.deleteMany({});
@@ -127,7 +111,4 @@ app.delete('/api/responses', async (req, res) => {
   }
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+module.exports = app;

@@ -8,8 +8,10 @@ const isLocal = (
   window.location.hostname === '127.0.0.1' ||
   window.location.protocol === 'file:'
 );
-const backendUrl = localStorage.getItem('birthday_api_url') ||
-  (isLocal ? 'http://localhost:3000' : DEFAULT_BACKEND_URL);
+// On production (e.g., Vercel), use relative path '' so /api/response hits Vercel serverless backend automatically
+const backendUrl = isLocal
+  ? (localStorage.getItem('birthday_api_url') || 'http://localhost:3000')
+  : (window.location.hostname.includes('vercel.app') ? '' : (localStorage.getItem('birthday_api_url') || DEFAULT_BACKEND_URL));
 
 // Get or generate a persistent sessionId for this browser session
 let sessionId = sessionStorage.getItem('birthday_session_id');
